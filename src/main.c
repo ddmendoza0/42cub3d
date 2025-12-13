@@ -9,7 +9,9 @@ int	main(int argc, char** argv)
 		printf("Error\nUsage: ./cub3D <map.cub>\n");
 		return (1);
 	}
-	// TODO: Validar extensión .cub
+	ft_memset(&game, 0, sizeof(t_game));
+	if (!parse_cub_file(argv[1], &game))
+		return (1);
 	// TODO: Parsear el archivo
 	// TODO: Validar el mapa
 	// TODO: Inicializar MLX y renderizar

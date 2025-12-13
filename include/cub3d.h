@@ -55,5 +55,6 @@ typedef struct s_game
 
 //DEFINITIONS
 int		main(int argc, char **argv);
+int		parse_cub_file(char *filename, t_game *game);
 
 #endif
