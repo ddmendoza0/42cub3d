@@ -4,6 +4,7 @@
 int	parse_cub_file(char *filename, t_game *game)
 {
 	int		fd;
+	char	*line;
 
 	if (!ft_strnstr(filename, ".cub", ft_strlen(filename)))
 	{
@@ -16,8 +17,18 @@ int	parse_cub_file(char *filename, t_game *game)
 		printf("Error\nCannot open file: %s\n", filename);
 		return (0);
 	}
-	(void)game;
-	// TODO: Leer y parsear el archivo línea por línea
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (!parse_identifier(line, game))
+		{
+			free(line);
+			close(fd);
+			return (0);
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
 	
 	close(fd);
 	return (1);
