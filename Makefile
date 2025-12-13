@@ -1,31 +1,55 @@
 
 
+# **************************************************************************** #
+#                                   VARIABLES                                  #
+# **************************************************************************** #
 
 NAME	=	cub3D
 
-HEADERS	=	-I ./include -I $(LIBMLX)/include -I$(LIBFT)
-
 LIBMLX	=	./lib/MLX42
 LIBFT	=	./lib/libft
+HEADERS =	-I./include -I$(LIBMLX)/include -I$(LIBFT)
+
+
+# **************************************************************************** #
+#                                   SOURCE FILES                               #
+# **************************************************************************** #
+
+GAME_DIR		=	$(SRC_DIR)game/
+GAME_FILES		=	$(GAME_DIR)
+
+PARSING_DIR		=	$(SRC_DIR)parsing/
+PARSING_FILES	=	$(PARSING_DIR)
+
+UTILS_DIR		=	$(SRC_DIR)utils/
+UTILS_FILES		=	$(UTILS_DIR)
+
+SRC_DIR			=	src/
+SRCS			=	$(SRC_DIR)main.c\
+					$(GAME_FILES)\
+					$(PARSING_FILES)\
+					$(UTILS_FILES)
+
+OBJ_DIR			=	obj/
+OBJS			=	$(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+
+
+# **************************************************************************** #
+#                                   COMPILATION                                #
+# **************************************************************************** #
+
+CC		=	cc
+CFLAGS  =	-g -Wall -Wextra -Werror -Wunreachable-code -Ofast $(HEADERS)
 LIBS	=	$(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm  $(LIBFT)/libft.a
 
+RM		=	rm -f
 
-GAME_DIR	= $(SRC_DIR)game/
-PARSING_DIR = $(SRC_DIR)parsing/
-UTILS_DIR	= $(SRC_DIR)utils/
+INCLUDE =	include/cub3d.h Makefile
 
-SRC_DIR =	src/
-SRCS	=	$(SRC_DIR)main.c
 
-OBJ_DIR =	obj/
-OBJS	=	$(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
-
-INCLUDE =	include/fractol.h Makefile
-
-CC	=	cc
-CFLAGS	=	-g -Wall -Wextra -Werror -Wunreachable-code -Ofast -I./libft \
-		-I./include -I$(LIBMLX)/include -I$(LIBFT)
-RM	=	rm -f
+# **************************************************************************** #
+#                                   RULES                                      #
+# **************************************************************************** #
 
 all:	libft libmlx $(NAME)
 
