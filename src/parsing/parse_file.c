@@ -16,6 +16,7 @@ int	parse_cub_file(char *filename, t_game *game)
 		printf("Error\nCannot open file: %s\n", filename);
 		return (0);
 	}
+	(void)game;
 	// TODO: Leer y parsear el archivo línea por línea
 	
 	close(fd);
