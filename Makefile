@@ -19,15 +19,15 @@ GAME_DIR		=	$(SRC_DIR)game/
 GAME_FILES		=	$(GAME_DIR)
 
 PARSING_DIR		=	$(SRC_DIR)parsing/
-PARSING_FILES	=	$(PARSING_DIR)
+PARSING_FILES	=	$(PARSING_DIR)parse_file.c
 
 UTILS_DIR		=	$(SRC_DIR)utils/
 UTILS_FILES		=	$(UTILS_DIR)
 
 SRC_DIR			=	src/
 SRCS			=	$(SRC_DIR)main.c\
-#					$(GAME_FILES)\
-#					$(PARSING_FILES)\
+					$(PARSING_FILES)\
+#					$(GAME_FILES)\		
 #					$(UTILS_FILES)
 
 OBJ_DIR			=	obj/
