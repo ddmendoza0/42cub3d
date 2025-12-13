@@ -26,9 +26,9 @@ UTILS_FILES		=	$(UTILS_DIR)
 
 SRC_DIR			=	src/
 SRCS			=	$(SRC_DIR)main.c\
-					$(GAME_FILES)\
-					$(PARSING_FILES)\
-					$(UTILS_FILES)
+#					$(GAME_FILES)\
+#					$(PARSING_FILES)\
+#					$(UTILS_FILES)
 
 OBJ_DIR			=	obj/
 OBJS			=	$(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
