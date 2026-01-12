@@ -44,8 +44,7 @@ int	validate_map_characters(t_game *game)
 		while (game->map.grid[i][j])
 		{
 			if (!is_valid_char(game->map.grid[i][j]))
-				return (printf("Error\nInvalid character in map: %c\n", 
-					game->map.grid[i][j]), 0);
+				return (printf("Error\nInvalid character in map: %c (ASCII: %d)\n", game->map.grid[i][j], game->map.grid[i][j]), 0);
 			if (is_player(game->map.grid[i][j]))
 			{
 				player_count++;
