@@ -22,6 +22,7 @@ PARSING_DIR		=	$(SRC_DIR)parsing/
 PARSING_FILES	=	$(PARSING_DIR)parse_file.c\
 					$(PARSING_DIR)parse_ids.c\
 					$(PARSING_DIR)parse_validate.c\
+					$(PARSING_DIR)parse_map.c\
 
 UTILS_DIR		=	$(SRC_DIR)utils/
 UTILS_FILES		=	$(UTILS_DIR)

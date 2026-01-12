@@ -12,8 +12,6 @@ int	main(int argc, char** argv)
 	ft_memset(&game, 0, sizeof(t_game));
 	if (!parse_cub_file(argv[1], &game))
 		return (1);
-	// TODO: Parsear el archivo
-	// TODO: Validar el mapa
 	// TODO: Inicializar MLX y renderizar
 
 	printf("cub3D started with map: %s\n", argv[1]);
