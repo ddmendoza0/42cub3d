@@ -53,19 +53,75 @@ static int	parse_color(char *line, t_colors *colors, int is_floor)
 	return (1);
 }
 
-int	parse_identifier(char *line, t_game *game)
+static int	parse_north_south(char *line, t_game *game)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
+	{
+		if (game->has_north)
+			return (printf("Error\nDuplicate identifier: NO\n"), 0);
+		game->has_north = 1;
 		return (parse_texture(line, &game->textures.north));
+	}
 	else if (ft_strncmp(line, "SO ", 3) == 0)
+	{
+		if (game->has_south)
+			return (printf("Error\nDuplicate identifier: SO\n"), 0);
+		game->has_south = 1;
 		return (parse_texture(line, &game->textures.south));
-	else if (ft_strncmp(line, "WE ", 3) == 0)
+	}
+	return (-1);
+}
+
+static int	parse_west_east(char *line, t_game *game)
+{
+	if (ft_strncmp(line, "WE ", 3) == 0)
+	{
+		if (game->has_west)
+			return (printf("Error\nDuplicate identifier: WE\n"), 0);
+		game->has_west = 1;
 		return (parse_texture(line, &game->textures.west));
+	}
 	else if (ft_strncmp(line, "EA ", 3) == 0)
+	{
+		if (game->has_east)
+			return (printf("Error\nDuplicate identifier: EA\n"), 0);
+		game->has_east = 1;
 		return (parse_texture(line, &game->textures.east));
-	else if (ft_strncmp(line, "F ", 2) == 0)
+	}
+	return (-1);
+}
+
+static int	parse_floor_ceiling(char *line, t_game *game)
+{
+	if (ft_strncmp(line, "F ", 2) == 0)
+	{
+		if (game->has_floor)
+			return (printf("Error\nDuplicate identifier: F\n"), 0);
+		game->has_floor = 1;
 		return (parse_color(line, &game->colors, 1));
+	}
 	else if (ft_strncmp(line, "C ", 2) == 0)
+	{
+		if (game->has_ceiling)
+			return (printf("Error\nDuplicate identifier: C\n"), 0);
+		game->has_ceiling = 1;
 		return (parse_color(line, &game->colors, 0));
+	}
+	return (-1);
+}
+
+int	parse_identifier(char *line, t_game *game)
+{
+	int	result;
+
+	result = parse_north_south(line, game);
+	if (result != -1)
+		return (result);
+	result = parse_west_east(line, game);
+	if (result != -1)
+		return (result);
+	result = parse_floor_ceiling(line, game);
+	if (result != -1)
+		return (result);
 	return (1);
 }

@@ -29,7 +29,11 @@ int	parse_cub_file(char *filename, t_game *game)
 		free(line);
 		line = get_next_line(fd);
 	}
-	
+	if (!validate_identifiers(game))
+	{
+		close(fd);
+		return (0);
+	}
 	close(fd);
 	return (1);
 }

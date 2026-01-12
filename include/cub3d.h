@@ -51,11 +51,18 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	mlx_t		*mlx;
+	int			has_north;
+	int			has_south;
+	int			has_west;
+	int			has_east;
+	int			has_floor;
+	int			has_ceiling;
 }	t_game;
 
 //DEFINITIONS
 int		main(int argc, char **argv);
 int		parse_cub_file(char *filename, t_game *game);
 int		parse_identifier(char *line, t_game *game);
+int		validate_identifiers(t_game *game);
 
 #endif
