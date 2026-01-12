@@ -19,7 +19,7 @@ GAME_DIR		=	$(SRC_DIR)game/
 GAME_FILES		=	$(GAME_DIR)
 
 PARSING_DIR		=	$(SRC_DIR)parsing/
-PARSING_FILES	=	$(PARSING_DIR)parse_file.c
+PARSING_FILES	=	$(PARSING_DIR)parse_file.c\
 					$(PARSING_DIR)parse_ids.c\
 					$(PARSING_DIR)parse_validate.c\
 
