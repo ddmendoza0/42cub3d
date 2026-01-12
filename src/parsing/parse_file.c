@@ -37,11 +37,32 @@ int	parse_cub_file(char *filename, t_game *game)
 	if (!validate_identifiers(game))
 	{
 		close(fd);
+		free_game(game);
 		return (0);
 	}
 	if (!parse_map(fd, game))
 	{
 		close(fd);
+		free_game(game);
+		return (0);
+	}
+	if (!calculate_map_width(game))
+	{
+		close(fd);
+		free_game(game);
+		return (0);
+	}
+
+	if (!validate_map_characters(game))
+	{
+		close(fd);
+		free_game(game);
+		return (0);
+	}
+	if (!validate_map_closed(game))
+	{
+		close(fd);
+		free_game(game);
 		return (0);
 	}
 	close(fd);

@@ -15,5 +15,6 @@ int	main(int argc, char** argv)
 	// TODO: Inicializar MLX y renderizar
 
 	printf("cub3D started with map: %s\n", argv[1]);
+	free_game(game);
 	return (0);
 }

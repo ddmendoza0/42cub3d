@@ -21,17 +21,18 @@ GAME_FILES		=	$(GAME_DIR)
 PARSING_DIR		=	$(SRC_DIR)parsing/
 PARSING_FILES	=	$(PARSING_DIR)parse_file.c\
 					$(PARSING_DIR)parse_ids.c\
-					$(PARSING_DIR)parse_validate.c\
+					$(PARSING_DIR)validate_ids.c\
 					$(PARSING_DIR)parse_map.c\
+					$(PARSING_DIR)validate_map.c\
 
 UTILS_DIR		=	$(SRC_DIR)utils/
-UTILS_FILES		=	$(UTILS_DIR)
+UTILS_FILES		=	$(UTILS_DIR)free.c\
 
 SRC_DIR			=	src/
 SRCS			=	$(SRC_DIR)main.c\
 					$(PARSING_FILES)\
-#					$(GAME_FILES)\		
-#					$(UTILS_FILES)
+					$(UTILS_FILES)
+#					$(GAME_FILES)\	
 
 OBJ_DIR			=	obj/
 OBJS			=	$(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
