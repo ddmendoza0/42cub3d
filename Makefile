@@ -16,22 +16,24 @@ HEADERS =	-I./include -I$(LIBMLX)/include -I$(LIBFT)
 # **************************************************************************** #
 
 GAME_DIR		=	$(SRC_DIR)game/
-GAME_FILES		=	$(GAME_DIR)
+GAME_FILES		=	$(GAME_DIR)test2.c\
+				$(GAME_DIR)test1_player.c
 
-PARSING_DIR		=	$(SRC_DIR)parsing/
-PARSING_FILES	=	$(PARSING_DIR)parse_file.c\
-					$(PARSING_DIR)parse_ids.c\
-					$(PARSING_DIR)validate_ids.c\
-					$(PARSING_DIR)parse_map.c\
-					$(PARSING_DIR)validate_map.c\
+#PARSING_DIR		=	$(SRC_DIR)parsing/
+#PARSING_FILES	=	$(PARSING_DIR)parse_file.c\
+#					$(PARSING_DIR)parse_ids.c\
+#					$(PARSING_DIR)validate_ids.c\
+#					$(PARSING_DIR)parse_map.c\
+#					$(PARSING_DIR)validate_map.c\
 
-UTILS_DIR		=	$(SRC_DIR)utils/
-UTILS_FILES		=	$(UTILS_DIR)free.c\
+#UTILS_DIR		=	$(SRC_DIR)utils/
+#UTILS_FILES		=	$(UTILS_DIR)free.c\
 
 SRC_DIR			=	src/
-SRCS			=	$(SRC_DIR)main.c\
-					$(PARSING_FILES)\
-					$(UTILS_FILES)
+SRCS			=	$(GAME_FILES)
+#					$(SRC_DIR)main.c\
+#					$(PARSING_FILES)\
+#					$(UTILS_FILES)
 #					$(GAME_FILES)\	
 
 OBJ_DIR			=	obj/
