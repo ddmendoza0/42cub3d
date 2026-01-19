@@ -6,7 +6,7 @@
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 12:00:36 by diespino          #+#    #+#             */
-/*   Updated: 2026/01/16 20:36:09 by diespino         ###   ########.fr       */
+/*   Updated: 2026/01/19 15:29:18 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	mlx_t		*mlx;
+	mlx_image_t	*img;
 	int			has_north;
 	int			has_south;
 	int			has_west;
@@ -100,10 +101,15 @@ int		calculate_map_width(t_game *game);
 int		validate_map_characters(t_game *game);
 int		validate_map_closed(t_game *game);
 void	free_game(t_game *game);*/
-//void	move_player(mlx_t *mlx, t_player *player);
 
+// GAME && PLAYER
+void	init_game(t_game *game);
+void	draw_loop(void *param);
+void	draw_line(t_game *game, double ray_angle, int screen_x);
+void	pixel_put(t_game *game, int x, int y, uint32_t color);
 bool    touch(double ray_x, double ray_y, t_game *game);
 void	move_player(t_game *game, t_player *player);
 void	init_player(t_player *player);
+double	fixed_dist(double ray_x, double ray_y, t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:50:12 by diespino          #+#    #+#             */
-/*   Updated: 2026/01/16 17:12:11 by diespino         ###   ########.fr       */
+/*   Updated: 2026/01/19 17:19:10 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**get_map(void)
 	return (map);
 }
 
-static void	pixel_put(t_game *game, int x, int y, uint32_t color)
+void	pixel_put(t_game *game, int x, int y, uint32_t color)
 {
 	if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT)
 		return ;
@@ -132,100 +132,19 @@ double	distance(double x, double y)
 	return (sqrt(x * x + y * y));
 }
 
-double	fixed_dist(double x1, double y1, double x2, double y2, t_game *game)
+double	fixed_dist(double ray_x, double ray_y, t_game *game)
 {
 	double	delta_x;
 	double	delta_y;
 	double	angle;
 
-	delta_x = x2 - x1;
-	delta_y = y2 - y1;
+	delta_x = ray_x - game->player.x;
+	delta_y = ray_y - game->player.y;
 	angle = atan2(delta_y, delta_x) - game->player.angle;
 	return (distance(delta_x, delta_y) * cos(angle));
 }
 
-void	draw_line(t_player *player, t_game *game, double ray_angle, int screen_x)
-{
-	double	ray_x;
-	double	ray_y;
-	double	cos_angle;
-	double	sin_angle;
-
-	double	dist;
-	double	height;
-	int	start_y;
-	int	end_y;
-
-	double	prev_x;
-	double	prev_y;
-	int	map_x;
-	int	map_y;
-	int	prev_map_x;
-	int	prev_map_y;
-	int	wall_dir;
-	int	color;
-
-	ray_x = player->x;// PLAYER X
-	ray_y = player->y;// PLAYER Y
-	cos_angle = cos(ray_angle);
-	sin_angle = sin(ray_angle);
-//
-	while (!touch(ray_x, ray_y, game))
-	{
-		if (DEBUG)
-			pixel_put(game, (int)ray_x, (int)ray_y, 0xFF0000FF);
-		prev_x = ray_x;
-		prev_y = ray_y;
-		ray_x += cos_angle;
-		ray_y += sin_angle;
-	}
-	if (!DEBUG)
-	{
-		map_x = (int)(ray_x / BLOCK);
-		map_y = (int)(ray_y / BLOCK);
-		prev_map_x = (int)(prev_x / BLOCK);
-		prev_map_y = (int)(prev_y / BLOCK);
-//
-		if (map_x != prev_map_x)
-		{
-			if (cos_angle > 0)
-				wall_dir = EAST;
-			else
-				wall_dir = WEST;
-		}
-		else
-		{
-			if (sin_angle > 0)
-				wall_dir = SOUTH;
-			else
-				wall_dir = NORTH;
-		}
-		if (wall_dir == NORTH)
-			color = 0x00FF00FF;// GREEN
-		else if (wall_dir == WEST)
-			color = 0xFF0000FF;// RED
-		else if (wall_dir == EAST)
-			color = 0x0000FFFF;// BLUE
-		else if (wall_dir == SOUTH)
-			color = 0x00FFFFFF;// YELLOW
-		dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
-		height = (BLOCK / dist) * (WIDTH / 2.0);
-		start_y = (int)((HEIGHT - height) / 2.0);
-		end_y = (int)(start_y + height);
-		if (start_y < 0)
-			start_y = 0;
-		if (end_y > HEIGHT)
-			end_y = HEIGHT;
-		while (start_y < end_y)
-		{
-			pixel_put(game, screen_x, start_y, color);
-//			pixel_put(game, screen_x, start_y, 0xFF0000FF);
-			start_y++;
-		}
-	}
-}
-
-static void	draw_loop(void *param)
+void	draw_loop(void *param)
 {
 	t_game		*game;
 	t_player	*player;
@@ -235,29 +154,22 @@ static void	draw_loop(void *param)
 
 	game = (t_game *)param;
 	player = &game->player;
-//
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
-//
-//	move_player(game->mlx, player);
 	move_player(game, player);
-	clear_img(game);// Textura suelo/techo ??
-//
+	clear_img(game);// Textura suelo/techo
 	if (DEBUG)
 	{
 		draw_square((int)player->x, (int)player->y, 10, game);
 		draw_map(game);
 	}
-//	
 	fraction = (PI / 3.0) / (double)WIDTH;
 	ray_angle = player->angle - (PI / 6.0);
-//
-	i = 0;
-	while(i < WIDTH)
+	i = -1;
+	while(++i < WIDTH)
 	{
-		draw_line(player, game, ray_angle, i);
+		draw_line(game, ray_angle, i);
 		ray_angle += fraction;
-		i++;
 	}
 }
 

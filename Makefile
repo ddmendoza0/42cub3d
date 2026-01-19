@@ -17,7 +17,8 @@ HEADERS =	-I./include -I$(LIBMLX)/include -I$(LIBFT)
 
 GAME_DIR		=	$(SRC_DIR)game/
 GAME_FILES		=	$(GAME_DIR)test2.c\
-				$(GAME_DIR)test1_player.c
+				$(GAME_DIR)player_move.c\
+				$(GAME_DIR)raycast.c
 
 #PARSING_DIR		=	$(SRC_DIR)parsing/
 #PARSING_FILES	=	$(PARSING_DIR)parse_file.c\

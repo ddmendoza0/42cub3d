@@ -6,11 +6,12 @@
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:58:57 by diespino          #+#    #+#             */
-/*   Updated: 2026/01/16 20:23:22 by diespino         ###   ########.fr       */
+/*   Updated: 2026/01/19 15:14:32 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "test.h"
+# include "cub3d.h"
+//# include "test.h"
 
 //void	move_player(mlx_t *mlx, t_player *player)
 void    move_player(t_game *game, t_player *player)
@@ -81,12 +82,11 @@ void    move_player(t_game *game, t_player *player)
 		}
 	}
 }
-
+/*
 // static void     pixel_put(t_game *game, int x, int y, uint32_t color)
-
 void	init_player(t_player *player)
 {
 	player->x = WIDTH / 2.0;
 	player->y = HEIGHT / 2.0;
 	player->angle = PI / 2.0;
-}
+}*/

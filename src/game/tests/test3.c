@@ -6,11 +6,12 @@
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 13:50:12 by diespino          #+#    #+#             */
-/*   Updated: 2026/01/16 20:36:02 by diespino         ###   ########.fr       */
+/*   Updated: 2026/01/19 15:14:18 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "cub3d.h"
+//#include "test.h"
 
 // typedef struct s_game
 // {
@@ -19,7 +20,7 @@
 //         t_player        player;// Jugador
 //         char            **map;// Mapa
 // }       t_game;
-
+/*
 char	**get_map(void)
 {
 	char	**map;
@@ -37,7 +38,7 @@ char	**get_map(void)
 	map[9] = "11111  11111111";
 	map[10] = NULL;
 	return (map);
-}
+}*/
 
 static void	pixel_put(t_game *game, int x, int y, uint32_t color)
 {
@@ -98,7 +99,7 @@ static void	draw_map(t_game *game)
 	int		y;
 
 	y = 0;
-	map = game->map;
+	map = game->map.grid;
 	while (map[y])
 	{
 		x = 0;
@@ -122,9 +123,9 @@ bool	touch(double ray_x, double ray_y, t_game *game)
 	x = (int)(ray_x / BLOCK);
 	y = (int)(ray_y / BLOCK);
 
-	if (y < 0 || x < 0 || !game->map[y] || !game->map[y][x])
+	if (y < 0 || x < 0 || !game->map.grid[y] || !game->map.grid[y][x])
 		return (true);
-	return (game->map[y][x] == '1');
+	return (game->map.grid[y][x] == '1');
 }
 
 double	distance(double x, double y)
@@ -225,7 +226,7 @@ void	draw_line(t_player *player, t_game *game, double ray_angle, int screen_x)
 	}
 }
 
-static void	draw_loop(void *param)
+void	draw_loop(void *param)
 {
 	t_game		*game;
 	t_player	*player;
@@ -265,10 +266,10 @@ static void	draw_loop(void *param)
 
 void	init_game(t_game *game)
 {
-	init_player(&game->player);
-//	iniciliza el player
-	game->map = get_map();
-//	parsea el mapa
+//	init_player(&game->player);
+//	
+//	game->map = get_map();
+//
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Cube3D", false);
 //		Tamano de ventana && nombre
 	if (!game->mlx)
@@ -288,7 +289,7 @@ void	init_game(t_game *game)
 	}
 //		Mete la imagen en la ventana
 }
-
+/*
 int	main(void)
 {
 	t_game	game;
@@ -300,4 +301,4 @@ int	main(void)
 	
 	mlx_terminate(game.mlx);
 	return (0);
-}
+}*/
