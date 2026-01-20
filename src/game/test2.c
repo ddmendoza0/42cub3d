@@ -25,11 +25,11 @@ char	**get_map(void)
 	char	**map;
 
 	map = malloc(sizeof(char *) * 11);
-	map[0] = "   111111111111111";
-	map[1] = "   100000000000001";
-	map[2] = "   100000000011111";
-	map[3] = "   100000000000001";
-	map[4] = "111100000000000001";
+	map[0] = "   111111111111111                        1111";
+	map[1] = "   100000000000001                        1001";
+	map[2] = "   1000000000111111111111111111111111111111001";
+	map[3] = "   1000000000000010000000000000000000000000001";
+	map[4] = "1111000000000000011111111111111111111111111111";
 	map[5] = "100000000000101111";
 	map[6] = "100000000000001";
 	map[7] = "100011110000001";
@@ -111,37 +111,6 @@ static void	draw_map(t_game *game)
 		y++;
 	}
 
-}
-
-// Si en el mapa hay un 1 no se dibuja el POV del player
-bool	touch(double ray_x, double ray_y, t_game *game)
-{
-	int	x;
-	int	y;
-
-	x = (int)(ray_x / BLOCK);
-	y = (int)(ray_y / BLOCK);
-
-	if (y < 0 || x < 0 || !game->map[y] || !game->map[y][x])
-		return (true);
-	return (game->map[y][x] == '1');
-}
-
-double	distance(double x, double y)
-{
-	return (sqrt(x * x + y * y));
-}
-
-double	fixed_dist(double ray_x, double ray_y, t_game *game)
-{
-	double	delta_x;
-	double	delta_y;
-	double	angle;
-
-	delta_x = ray_x - game->player.x;
-	delta_y = ray_y - game->player.y;
-	angle = atan2(delta_y, delta_x) - game->player.angle;
-	return (distance(delta_x, delta_y) * cos(angle));
 }
 
 void	draw_loop(void *param)

@@ -13,6 +13,19 @@
 //# include "cub3d.h"
 # include "test.h"
 
+bool	touch(double ray_x, double ray_y, t_game *game)
+{
+	int	x;
+	int	y;
+
+	x = (int)(ray_x / BLOCK);
+	y = (int)(ray_y / BLOCK);
+
+	if (y < 0 || x < 0 || !game->map[y] || !game->map[y][x])
+		return (true);
+	return (game->map[y][x] == '1');
+}
+
 static void	move_forward_backward(double dir_x, double dir_y, t_game *game)
 {
 	double	new_x;

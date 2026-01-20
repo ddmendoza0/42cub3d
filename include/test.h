@@ -67,11 +67,26 @@ typedef struct s_player
 //	char	orientation;
 }	t_player;
 
+typedef struct s_rcast
+{
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	double	ray_x;
+	double	ray_y;
+	double	dist_x;
+	double	dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+}	t_rcast;
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_player	player;
+	t_rcast		rcast;
 	char		**map;
 }	t_game;
 
