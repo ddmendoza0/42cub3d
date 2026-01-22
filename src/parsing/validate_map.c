@@ -144,13 +144,25 @@ int	validate_map_closed(t_game *game)
 {
 	char	**map_copy;
 	int		result;
+	int		i;
 
 	map_copy = copy_map(game);
 	if (!map_copy)
 		return (0);
 	
+	printf("Starting flood fill from (%d, %d)\n", (int)game->player.x, (int)game->player.y);
+	
 	result = flood_fill(map_copy, (int)game->player.x, 
 		(int)game->player.y, game);
+	
+	printf("Flood fill result: %d\n", result);
+	printf("Map after flood fill:\n");
+	i = 0;
+	while (i < game->map.height)
+	{
+		printf("[%d] '%s'\n", i, map_copy[i]);
+		i++;
+	}
 	
 	free_map_copy(map_copy, game->map.height);
 	
