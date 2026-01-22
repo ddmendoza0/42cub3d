@@ -37,7 +37,7 @@ static char	**convert_list_to_array(t_list *map_lines, int height)
 	return (grid);
 }
 
-int	parse_map(int fd, t_game *game)
+int	parse_map(int fd, t_game *game, char *first_line)
 {
 	char	*line;
 	t_list	*map_lines;
@@ -46,6 +46,14 @@ int	parse_map(int fd, t_game *game)
 
 	map_lines = NULL;
 	height = 0;
+	if (first_line && is_map_line(first_line))
+	{
+		new_node = ft_lstnew(first_line);
+		if (!new_node)
+			return (0);
+		ft_lstadd_back(&map_lines, new_node);
+		height++;
+	}
 	line = get_next_line(fd);
 	while (line)
 	{

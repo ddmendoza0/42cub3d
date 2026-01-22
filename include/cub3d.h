@@ -80,7 +80,7 @@ int		main(int argc, char **argv);
 int		parse_cub_file(char *filename, t_game *game);
 int		parse_identifier(char *line, t_game *game);
 int		validate_identifiers(t_game *game);
-int		parse_map(int fd, t_game *game);
+int		parse_map(int fd, t_game *game, char *first_line):
 int		calculate_map_width(t_game *game);
 int		validate_map_characters(t_game *game);
 int		validate_map_closed(t_game *game);
