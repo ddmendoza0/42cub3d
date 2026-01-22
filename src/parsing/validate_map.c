@@ -138,10 +138,7 @@ int	validate_map_closed(t_game *game)
 		(int)game->player.y, game);
 	i = 0;
 	while (i < game->map.height)
-	{
-		printf("[%d] '%s'\n", i, map_copy[i]);
 		i++;
-	}
 	free_map_copy(map_copy, game->map.height);
 	if (!result)
 		return (printf("Error\nMap is not closed by walls\n"), 0);
