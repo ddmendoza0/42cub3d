@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 
+/*
 void	draw_col(double dist, int color, int screen_x, t_game *game)
 {
 	double	dist_plane;
@@ -31,6 +32,59 @@ void	draw_col(double dist, int color, int screen_x, t_game *game)
 	{
 		pixel_put(game, screen_x, start_y, color);
 		start_y++;
+	}
+}*/
+void	draw_col(t_game *game, double dist, int screen_x, int side, double wall_x)
+{
+	mlx_texture_t	*texture;
+	double			dist_plane;
+	double			height;
+	int				start_y;
+	int				end_y;
+	int				tex_x;
+	int				tex_y;
+	double			step;
+	double			tex_pos;
+	uint32_t		color;
+	int				y;
+
+
+	if (side == 0)
+	{
+		if (game->rcast.ray_x > 0)
+			texture = game->tex_east;
+		else
+			texture = game->tex_west;
+	}
+	else
+	{
+		if (game->rcast.ray_y > 0)
+			texture = game->tex_south;
+		else
+			texture = game->tex_north;
+	}
+	dist_plane = (WIDTH / 2.0) / tan(PI / 6.0);
+	height = (BLOCK / dist) * dist_plane;
+	start_y = (int)((HEIGHT - height) / 2.0);
+	end_y = (int)(start_y + height);
+	tex_x = (int)(wall_x * (double)texture->width);
+	if ((side == 0 && game->rcast.ray_x < 0) || (side == 1 && game->rcast.ray_y < 0))
+		tex_x = texture->width - tex_x - 1;
+	step = (double)texture->height / height;
+	tex_pos = (start_y - HEIGHT / 2.0 + height / 2.0) * step;
+	if (start_y < 0)
+		y = 0;
+	else
+		y = start_y;
+	if (start_y < 0)
+		tex_pos += (-start_y) * step;
+	while (y < end_y && y < HEIGHT)
+	{
+		tex_y = (int)tex_pos & (texture->height - 1);
+		tex_pos += step;
+		color = ((uint32_t *)texture->pixels)[tex_y * texture->width + tex_x];
+		pixel_put(game, screen_x, y, color);
+		y++;
 	}
 }
 
