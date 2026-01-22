@@ -1,7 +1,7 @@
 
 #include "cub3d.h"
 
-static void	init_player_from_parsed(t_game *game)
+static void	init_player(t_game *game)
 {
 	game->player.x = (game->player.x * BLOCK) + (BLOCK / 2.0);
 	game->player.y = (game->player.y * BLOCK) + (BLOCK / 2.0);
