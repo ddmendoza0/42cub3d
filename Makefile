@@ -17,25 +17,26 @@ HEADERS =	-I./include -I$(LIBMLX)/include -I$(LIBFT)
 
 GAME_DIR		=	$(SRC_DIR)game/
 GAME_FILES		=	$(GAME_DIR)test2.c\
-				$(GAME_DIR)player_move.c\
-				$(GAME_DIR)raycast_dda.c
+					$(GAME_DIR)player_move.c\
+					$(GAME_DIR)raycast_dda.c\
+					$(GAME_DIR)init_game.c\
+					$(GAME_DIR)render.c
 
-#PARSING_DIR		=	$(SRC_DIR)parsing/
-#PARSING_FILES	=	$(PARSING_DIR)parse_file.c\
-#					$(PARSING_DIR)parse_ids.c\
-#					$(PARSING_DIR)validate_ids.c\
-#					$(PARSING_DIR)parse_map.c\
-#					$(PARSING_DIR)validate_map.c\
+PARSING_DIR		=	$(SRC_DIR)parsing/
+PARSING_FILES	=	$(PARSING_DIR)parse_file.c\
+					$(PARSING_DIR)parse_ids.c\
+					$(PARSING_DIR)validate_ids.c\
+					$(PARSING_DIR)parse_map.c\
+					$(PARSING_DIR)validate_map.c\
 
 #UTILS_DIR		=	$(SRC_DIR)utils/
 #UTILS_FILES		=	$(UTILS_DIR)free.c\
 
 SRC_DIR			=	src/
-SRCS			=	$(GAME_FILES)
-#					$(SRC_DIR)main.c\
-#					$(PARSING_FILES)\
+SRCS			=	$(SRC_DIR)main.c\
+					$(PARSING_FILES)\
+#					$(GAME_FILES)\
 #					$(UTILS_FILES)
-#					$(GAME_FILES)\	
 
 OBJ_DIR			=	obj/
 OBJS			=	$(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
