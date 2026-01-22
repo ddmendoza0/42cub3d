@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//# include "cub3d.h"
-# include "test.h"
+# include "cub3d.h"
 
 bool	touch(double ray_x, double ray_y, t_game *game)
 {

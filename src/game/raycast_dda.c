@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "cub3d.h"
 
 void	draw_col(double dist, int color, int screen_x, t_game *game)
 {
