@@ -80,6 +80,10 @@ typedef struct s_game
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_rcast		rcast;
+	mlx_texture_t	*tex_north;
+	mlx_texture_t	*tex_south;
+	mlx_texture_t	*tex_east;
+	mlx_texture_t	*tex_west;
 	int			has_north;
 	int			has_south;
 	int			has_west;
@@ -106,5 +110,6 @@ void	move_player(t_game *game, t_player *player);
 void	draw_line(t_game *game, double ray_angle, int screen_x);
 void	pixel_put(t_game *game, int x, int y, uint32_t color);
 void	clear_img(t_game *game);
+int		load_textures(t_game *game);
 
 #endif

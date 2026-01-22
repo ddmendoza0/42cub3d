@@ -18,6 +18,8 @@ static void	init_player(t_game *game)
 int	init_game(t_game *game)
 {
 	init_player(game);
+	if (!load_textures(game))
+		return (0);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
 	if (!game->mlx)
 		return (0);

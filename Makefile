@@ -19,7 +19,8 @@ GAME_DIR		=	$(SRC_DIR)game/
 GAME_FILES		=	$(GAME_DIR)player_move.c\
 					$(GAME_DIR)raycast_dda.c\
 					$(GAME_DIR)init_game.c\
-					$(GAME_DIR)render.c
+					$(GAME_DIR)render.c\
+					$(GAME_DIR)load_textures.c
 #					$(GAME_DIR)test2.c
 					
 PARSING_DIR		=	$(SRC_DIR)parsing/
