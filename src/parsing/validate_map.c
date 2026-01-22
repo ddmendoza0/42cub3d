@@ -94,20 +94,30 @@ static void	free_map_copy(char **map, int height)
 	free(map);
 }
 
-static int	flood_fill(char **map, int x, int y, t_game *game)
+static int	is_valid_neighbor(char **map, int x, int y, t_game *game)
 {
 	if (y < 0 || y >= game->map.height)
 		return (0);
-	if (x < 0 || x >= (int)ft_strlen(map[y]))
+	if (x < 0)
+		return (0);
+	if (x >= (int)ft_strlen(map[y]))
+		return (0);
+	if (map[y][x] == ' ')
+	{
+		if (y == 0 || y == game->map.height - 1)
+			return (0);
+		if (x == 0 || x >= (int)ft_strlen(map[y]) - 1)
+			return (0);
+	}
+	return (1);
+}
+
+static int	flood_fill(char **map, int x, int y, t_game *game)
+{
+	if (!is_valid_neighbor(map, x, y, game))
 		return (0);
 	if (map[y][x] == '1' || map[y][x] == 'X')
 		return (1);
-	if (map[y][x] == ' ')
-	{
-		if (y == 0 || y == game->map.height - 1 
-			|| x == 0 || x == (int)ft_strlen(map[y]) - 1)
-			return (0);
-	}
 	map[y][x] = 'X';
 	if (!flood_fill(map, x + 1, y, game))
 		return (0);
@@ -117,7 +127,6 @@ static int	flood_fill(char **map, int x, int y, t_game *game)
 		return (0);
 	if (!flood_fill(map, x, y - 1, game))
 		return (0);
-	
 	return (1);
 }
 
