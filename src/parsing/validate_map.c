@@ -96,11 +96,8 @@ static void	free_map_copy(char **map, int height)
 
 static int	is_valid_position(char **map, int x, int y, t_game *game)
 {
-	// Fuera de límites del array = inválido
 	if (y < 0 || y >= game->map.height || x < 0)
 		return (0);
-	
-	// Más allá del final de la línea = inválido
 	if (x >= (int)ft_strlen(map[y]))
 		return (0);
 	
@@ -109,25 +106,13 @@ static int	is_valid_position(char **map, int x, int y, t_game *game)
 
 static int	flood_fill(char **map, int x, int y, t_game *game)
 {
-	// Si la posición no es válida = el mapa está abierto
 	if (!is_valid_position(map, x, y, game))
 		return (0);
-	
-	// Si es pared = OK, detener aquí
 	if (map[y][x] == '1')
 		return (1);
-	
-	// Si ya visitado = OK, detener aquí
 	if (map[y][x] == 'X')
 		return (1);
-	
-	// Si es espacio = OK, pero continuar verificando
-	// (los espacios dentro del mapa son válidos)
-	
-	// Marcar como visitado
 	map[y][x] = 'X';
-	
-	// Recursión en 4 direcciones
 	if (!flood_fill(map, x + 1, y, game))
 		return (0);
 	if (!flood_fill(map, x - 1, y, game))
@@ -149,25 +134,16 @@ int	validate_map_closed(t_game *game)
 	map_copy = copy_map(game);
 	if (!map_copy)
 		return (0);
-	
-	printf("Starting flood fill from (%d, %d)\n", (int)game->player.x, (int)game->player.y);
-	
 	result = flood_fill(map_copy, (int)game->player.x, 
 		(int)game->player.y, game);
-	
-	printf("Flood fill result: %d\n", result);
-	printf("Map after flood fill:\n");
 	i = 0;
 	while (i < game->map.height)
 	{
 		printf("[%d] '%s'\n", i, map_copy[i]);
 		i++;
 	}
-	
 	free_map_copy(map_copy, game->map.height);
-	
 	if (!result)
 		return (printf("Error\nMap is not closed by walls\n"), 0);
-	
 	return (1);
 }

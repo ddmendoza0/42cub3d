@@ -23,7 +23,6 @@ int	parse_cub_file(char *filename, t_game *game)
 		if (line[0] == '1' || line[0] == ' ')
 			break;
 		if (!parse_identifier(line, game))
-		if (!parse_identifier(line, game))
 		{
 			free(line);
 			close(fd);
