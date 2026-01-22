@@ -96,18 +96,18 @@ static void	free_map_copy(char **map, int height)
 
 static int	flood_fill(char **map, int x, int y, t_game *game)
 {
-	if (y < 0 || y >= game->map.height || x < 0)
-		return (1);
-	if (x >= (int)ft_strlen(map[y]))
+	if (y < 0 || y >= game->map.height)
+		return (0);
+	if (x < 0 || x >= (int)ft_strlen(map[y]))
+		return (0);
+	if (map[y][x] == '1' || map[y][x] == 'X')
 		return (1);
 	if (map[y][x] == ' ')
 	{
 		if (y == 0 || y == game->map.height - 1 
-			|| x == 0 || x >= game->map.width - 1)
+			|| x == 0 || x == (int)ft_strlen(map[y]) - 1)
 			return (0);
 	}
-	if (map[y][x] == '1' || map[y][x] == 'X')
-		return (1);
 	map[y][x] = 'X';
 	if (!flood_fill(map, x + 1, y, game))
 		return (0);
