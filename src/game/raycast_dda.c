@@ -89,7 +89,7 @@ static int	grid_move(t_game *game)
 			game->rcast.map_y += game->rcast.step_y;
 			side = 1;
 		}
-		if (game->map[game->rcast.map_y][game->rcast.map_x] == '1')
+		if (game->map.grid[game->rcast.map_y][game->rcast.map_x] == '1')
 			hit = true;
 	}
 	return (side);

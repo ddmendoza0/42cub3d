@@ -21,9 +21,9 @@ bool	touch(double ray_x, double ray_y, t_game *game)
 	x = (int)(ray_x / BLOCK);
 	y = (int)(ray_y / BLOCK);
 
-	if (y < 0 || x < 0 || !game->map[y] || !game->map[y][x])
+	if (y < 0 || x < 0 || !game->map.grid[y] || !game->map.grid[y][x])
 		return (true);
-	return (game->map[y][x] == '1');
+	return (game->map.grid[y][x] == '1');
 }
 
 static void	move_forward_backward(double dir_x, double dir_y, t_game *game)
