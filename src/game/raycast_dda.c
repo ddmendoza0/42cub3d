@@ -34,7 +34,7 @@ void	draw_col(double dist, int color, int screen_x, t_game *game)
 		start_y++;
 	}
 }*/
-void	draw_col(t_game *game, double dist, int screen_x, int side, double wall_x)
+void	draw_col(double dist, int screen_x, int side, double wall_x, t_game* game)
 {
 	mlx_texture_t	*texture;
 	double			dist_plane;
@@ -88,7 +88,7 @@ void	draw_col(t_game *game, double dist, int screen_x, int side, double wall_x)
 	}
 }
 
-static int	get_wall_text(t_game *game, int side)
+/*static int	get_wall_text(t_game* game, int side)
 {
 	if(side == 0)
 	{
@@ -104,7 +104,7 @@ static int	get_wall_text(t_game *game, int side)
 		else
 			return (0x00FF00FF);// NORTH [GREEN]
 	}
-}
+}*/
 
 double	grid_dist(t_game *game, int side, double ray_angle)
 {
@@ -177,7 +177,7 @@ static void	grid_pos_init(t_game *game)
 	}
 }
 
-void	draw_line(t_game *game, double ray_angle, int screen_x)
+/*void	draw_line(t_game* game, double ray_angle, int screen_x)
 {
 	int		side;
 	int		color;
@@ -199,4 +199,27 @@ void	draw_line(t_game *game, double ray_angle, int screen_x)
 	color = get_wall_text(game, side);
 //	dibujo de columnas
 	draw_col(dist, color, screen_x, game);
+}*/
+void	draw_line(t_game *game, double ray_angle, int screen_x)
+{
+	int		side;
+	double	dist;
+	double	wall_x;
+
+	game->rcast.map_x = (int)(game->player.x / BLOCK);
+	game->rcast.map_y = (int)(game->player.y / BLOCK);
+	game->rcast.ray_x = cos(ray_angle);
+	game->rcast.ray_y = sin(ray_angle);
+	game->rcast.dist_x = fabs(BLOCK / game->rcast.ray_x);
+	game->rcast.dist_y = fabs(BLOCK / game->rcast.ray_y);
+	grid_pos_init(game);
+	side = grid_move(game);
+	dist = grid_dist(game, side, ray_angle);
+	if (side == 0)
+		wall_x = game->player.y + dist * game->rcast.ray_y;
+	else
+		wall_x = game->player.x + dist * game->rcast.ray_x;
+	wall_x = wall_x / BLOCK;
+	wall_x -= floor(wall_x);
+	draw_col(dist, screen_x, side, wall_x, game);
 }
