@@ -94,31 +94,40 @@ static void	free_map_copy(char **map, int height)
 	free(map);
 }
 
-static int	is_valid_neighbor(char **map, int x, int y, t_game *game)
+static int	is_valid_position(char **map, int x, int y, t_game *game)
 {
-	if (y < 0 || y >= game->map.height)
+	// Fuera de límites del array = inválido
+	if (y < 0 || y >= game->map.height || x < 0)
 		return (0);
-	if (x < 0)
-		return (0);
+	
+	// Más allá del final de la línea = inválido
 	if (x >= (int)ft_strlen(map[y]))
 		return (0);
-	if (map[y][x] == ' ')
-	{
-		if (y == 0 || y == game->map.height - 1)
-			return (0);
-		if (x == 0 || x >= (int)ft_strlen(map[y]) - 1)
-			return (0);
-	}
+	
 	return (1);
 }
 
 static int	flood_fill(char **map, int x, int y, t_game *game)
 {
-	if (!is_valid_neighbor(map, x, y, game))
+	// Si la posición no es válida = el mapa está abierto
+	if (!is_valid_position(map, x, y, game))
 		return (0);
-	if (map[y][x] == '1' || map[y][x] == 'X')
+	
+	// Si es pared = OK, detener aquí
+	if (map[y][x] == '1')
 		return (1);
+	
+	// Si ya visitado = OK, detener aquí
+	if (map[y][x] == 'X')
+		return (1);
+	
+	// Si es espacio = OK, pero continuar verificando
+	// (los espacios dentro del mapa son válidos)
+	
+	// Marcar como visitado
 	map[y][x] = 'X';
+	
+	// Recursión en 4 direcciones
 	if (!flood_fill(map, x + 1, y, game))
 		return (0);
 	if (!flood_fill(map, x - 1, y, game))
@@ -127,6 +136,7 @@ static int	flood_fill(char **map, int x, int y, t_game *game)
 		return (0);
 	if (!flood_fill(map, x, y - 1, game))
 		return (0);
+	
 	return (1);
 }
 
