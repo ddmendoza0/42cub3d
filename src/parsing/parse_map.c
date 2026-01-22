@@ -51,6 +51,7 @@ int	parse_map(int fd, t_game *game)
 	{
 		if (is_map_line(line))
 		{
+			printf("Parsing map line %d: '%s'\n", height, line);
 			new_node = ft_lstnew(line);
 			if (!new_node)
 				return (0);
@@ -66,6 +67,7 @@ int	parse_map(int fd, t_game *game)
 			free(line);
 		line = get_next_line(fd);
 	}
+	printf("Total map lines parsed: %d\n", height);
 	game->map.grid = convert_list_to_array(map_lines, height);
 	game->map.height = height;
 	ft_lstclear(&map_lines, free);
