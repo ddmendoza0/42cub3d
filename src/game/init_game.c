@@ -6,9 +6,9 @@ static void	init_player(t_game *game)
 	game->player.x = (game->player.x * BLOCK) + (BLOCK / 2.0);
 	game->player.y = (game->player.y * BLOCK) + (BLOCK / 2.0);
 	if (game->player.orientation == 'N')
-		game->player.angle = PI / 2.0;
-	else if (game->player.orientation == 'S')
 		game->player.angle = 3.0 * PI / 2.0;
+	else if (game->player.orientation == 'S')
+		game->player.angle = PI / 2.0;
 	else if (game->player.orientation == 'E')
 		game->player.angle = 0.0;
 	else if (game->player.orientation == 'W')

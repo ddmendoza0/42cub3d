@@ -109,11 +109,3 @@ void    move_player(t_game *game, t_player *player)
 			mlx_is_key_down(game->mlx, MLX_KEY_D))
 		strafe_move(dir_x, dir_y, game);
 }
-
-// static void     pixel_put(t_game *game, int x, int y, uint32_t color)
-void	init_player(t_player *player)
-{
-	player->x = WIDTH / 2.0;
-	player->y = HEIGHT / 2.0;
-	player->angle = PI / 2.0;
-}

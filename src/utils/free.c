@@ -50,5 +50,12 @@ void	free_game(t_game *game)
 		return;
 	free_textures(&game->textures);
 	free_map(&game->map);
-	// TODO: Cuando implementes MLX, liberar mlx aquí también
+	if (game->tex_north)
+		mlx_delete_texture(game->tex_north);
+	if (game->tex_south)
+		mlx_delete_texture(game->tex_south);
+	if (game->tex_east)
+		mlx_delete_texture(game->tex_east);
+	if (game->tex_west)
+		mlx_delete_texture(game->tex_west);
 }
