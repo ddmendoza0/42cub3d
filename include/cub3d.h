@@ -57,6 +57,20 @@ typedef struct s_player
 	double	angle;
 }	t_player;
 
+typedef struct s_rcast
+{
+	int		map_x;
+	int		map_y;
+	double	ray_x;
+	double	ray_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	dist_x;
+	double	dist_y;
+	int		step_x;
+	int		step_y;
+}	t_rcast;
+
 typedef struct s_game
 {
 	t_textures	textures;
@@ -65,6 +79,7 @@ typedef struct s_game
 	t_player	player;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	t_rcast		rcast;
 	int			has_north;
 	int			has_south;
 	int			has_west;
