@@ -27,7 +27,12 @@ static char	**convert_list_to_array(t_list *map_lines, int height)
 	{
 		grid[i] = ft_strdup((char *)current->content);
 		if (!grid[i])
+		{
+			while (i-- >= 0)
+				free(grid[i]);
+			free(grid);
 			return (NULL);
+		}
 		if (grid[i][ft_strlen(grid[i]) - 1] == '\n')
 			grid[i][ft_strlen(grid[i]) - 1] = '\0';
 		current = current->next;
