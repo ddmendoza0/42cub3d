@@ -1,5 +1,60 @@
 #include "cub3d.h"
 
+static char	*pad_line(char *line, int target_width)
+{
+	char	*padded;
+	int		i;
+	int		len;
+
+	len = ft_strlen(line);
+	if (len >= target_width)
+		return (ft_strdup(line));
+	padded = malloc(target_width + 1);
+	if (!padded)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		padded[i] = line[i];
+		i++;
+	}
+	while (i < target_width)
+	{
+		padded[i] = ' ';
+		i++;
+	}
+	padded[i] = '\0';
+	return (padded);
+}
+
+static int	normalize_map(t_game *game)
+{
+	char	**new_grid;
+	int		i;
+
+	new_grid = malloc(sizeof(char *) * (game->map.height + 1));
+	if (!new_grid)
+		return (0);
+	i = 0;
+	while (i < game->map.height)
+	{
+		new_grid[i] = pad_line(game->map.grid[i], game->map.width);
+		if (!new_grid[i])
+		{
+			while (--i >= 0)
+				free(new_grid[i]);
+			free(new_grid);
+			return (0);
+		}
+		free(game->map.grid[i]);
+		i++;
+	}
+	new_grid[i] = NULL;
+	free(game->map.grid);
+	game->map.grid = new_grid;
+	return (1);
+}
+
 static int	is_map_line(char *line)
 {
 	int	i;
