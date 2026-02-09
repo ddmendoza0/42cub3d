@@ -102,6 +102,8 @@ static int	flood_fill(char **map, int x, int y, t_game *game)
 		return (0);
 	if (map[y][x] == '1' || map[y][x] == 'X')
 		return (1);
+	if (map[y][x] == ' ')
+		return (1);
 	map[y][x] = 'X';
 	if (!flood_fill(map, x + 1, y, game))
 		return (0);
