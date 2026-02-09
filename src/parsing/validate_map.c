@@ -11,25 +11,6 @@ static int	is_player(char c)
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
-int	calculate_map_width(t_game *game)
-{
-	int	i;
-	int	len;
-	int	max_width;
-
-	max_width = 0;
-	i = 0;
-	while (i < game->map.height)
-	{
-		len = ft_strlen(game->map.grid[i]);
-		if (len > max_width)
-			max_width = len;
-		i++;
-	}
-	game->map.width = max_width;
-	return (1);
-}
-
 int	validate_map_characters(t_game *game)
 {
 	int	i;
@@ -74,7 +55,12 @@ static char	**copy_map(t_game *game)
 	{
 		copy[i] = ft_strdup(game->map.grid[i]);
 		if (!copy[i])
-			return (NULL); // TODO: free previous
+		{
+			while (i-- >= 0)
+				free(copy[i]);
+			free(copy);
+			return (NULL);
+		}
 		i++;
 	}
 	copy[i] = NULL;
@@ -96,11 +82,17 @@ static void	free_map_copy(char **map, int height)
 
 static int	is_valid_position(char **map, int x, int y, t_game *game)
 {
-	if (y < 0 || y >= game->map.height || x < 0)
+	if (y < 0 || y >= game->map.height)
 		return (0);
-	if (x >= (int)ft_strlen(map[y]))
+	if (x < 0 || x >= game->map.width)
 		return (0);
-	
+	if (map[y][x] == ' ')
+	{
+		if (y == 0 || y == game->map.height - 1)
+			return (0);
+		if (x == 0 || x == game->map.width - 1)
+			return (0);
+	}
 	return (1);
 }
 
@@ -108,9 +100,9 @@ static int	flood_fill(char **map, int x, int y, t_game *game)
 {
 	if (!is_valid_position(map, x, y, game))
 		return (0);
-	if (map[y][x] == '1')
+	if (map[y][x] == '1' || map[y][x] == 'X')
 		return (1);
-	if (map[y][x] == 'X')
+	if (map[y][x] == ' ')
 		return (1);
 	map[y][x] = 'X';
 	if (!flood_fill(map, x + 1, y, game))
@@ -121,7 +113,6 @@ static int	flood_fill(char **map, int x, int y, t_game *game)
 		return (0);
 	if (!flood_fill(map, x, y - 1, game))
 		return (0);
-	
 	return (1);
 }
 

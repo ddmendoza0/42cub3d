@@ -1,5 +1,79 @@
 #include "cub3d.h"
 
+int	calculate_map_width(t_game *game)
+{
+	int	i;
+	int	len;
+	int	max_width;
+
+	max_width = 0;
+	i = 0;
+	while (i < game->map.height)
+	{
+		len = ft_strlen(game->map.grid[i]);
+		if (len > max_width)
+			max_width = len;
+		i++;
+	}
+	game->map.width = max_width;
+	return (1);
+}
+
+static char	*pad_line(char *line, int target_width)
+{
+	char	*padded;
+	int		i;
+	int		len;
+
+	len = ft_strlen(line);
+	if (len >= target_width)
+		return (ft_strdup(line));
+	padded = malloc(target_width + 1);
+	if (!padded)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		padded[i] = line[i];
+		i++;
+	}
+	while (i < target_width)
+	{
+		padded[i] = ' ';
+		i++;
+	}
+	padded[i] = '\0';
+	return (padded);
+}
+
+static int	normalize_map(t_game *game)
+{
+	char	**new_grid;
+	int		i;
+
+	new_grid = malloc(sizeof(char *) * (game->map.height + 1));
+	if (!new_grid)
+		return (0);
+	i = 0;
+	while (i < game->map.height)
+	{
+		new_grid[i] = pad_line(game->map.grid[i], game->map.width);
+		if (!new_grid[i])
+		{
+			while (--i >= 0)
+				free(new_grid[i]);
+			free(new_grid);
+			return (0);
+		}
+		free(game->map.grid[i]);
+		i++;
+	}
+	new_grid[i] = NULL;
+	free(game->map.grid);
+	game->map.grid = new_grid;
+	return (1);
+}
+
 static int	is_map_line(char *line)
 {
 	int	i;
@@ -27,7 +101,12 @@ static char	**convert_list_to_array(t_list *map_lines, int height)
 	{
 		grid[i] = ft_strdup((char *)current->content);
 		if (!grid[i])
+		{
+			while (--i >= 0)
+				free(grid[i]);
+			free(grid);
 			return (NULL);
+		}
 		if (grid[i][ft_strlen(grid[i]) - 1] == '\n')
 			grid[i][ft_strlen(grid[i]) - 1] = '\0';
 		current = current->next;
@@ -77,5 +156,11 @@ int	parse_map(int fd, t_game *game, char *first_line)
 	game->map.grid = convert_list_to_array(map_lines, height);
 	game->map.height = height;
 	ft_lstclear(&map_lines, free);
+	if (!game->map.grid)
+		return (0);
+	if (!calculate_map_width(game))
+		return (0);
+	if (!normalize_map(game))
+		return (printf("Error\nFailed to normalize map\n"), 0);
 	return (1);
 }

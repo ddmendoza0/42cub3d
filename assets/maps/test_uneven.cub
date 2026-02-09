@@ -1,0 +1,12 @@
+NO ./assets/textures/north.png
+SO ./assets/textures/south.png
+WE ./assets/textures/west.png
+EA ./assets/textures/east.png
+F 220,100,0
+C 225,30,0
+
+1111111111
+10000000001
+100N00001
+1111111111
+
