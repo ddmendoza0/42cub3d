@@ -3,6 +3,7 @@
 static int	parse_texture(char *line, char **texture)
 {
 	char	*path;
+	int		len;
 
 	while (*line && *line != ' ')
 		line++;
@@ -11,8 +12,14 @@ static int	parse_texture(char *line, char **texture)
 	path = ft_strdup(line);
 	if (!path)
 		return (0);
-	if (path[ft_strlen(path) - 1] == '\n')
-		path[ft_strlen(path) - 1] = '\0';
+	len = ft_strlen(path);
+	if (len > 0 && path[len - 1] == '\n')
+		path[len - 1] = '\0';
+	if (!validate_texture_file(path))
+	{
+		free(path);
+		return (0);
+	}
 	*texture = path;
 	return (1);
 }
