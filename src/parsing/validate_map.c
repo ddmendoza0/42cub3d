@@ -11,25 +11,6 @@ static int	is_player(char c)
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
-int	calculate_map_width(t_game *game)
-{
-	int	i;
-	int	len;
-	int	max_width;
-
-	max_width = 0;
-	i = 0;
-	while (i < game->map.height)
-	{
-		len = ft_strlen(game->map.grid[i]);
-		if (len > max_width)
-			max_width = len;
-		i++;
-	}
-	game->map.width = max_width;
-	return (1);
-}
-
 int	validate_map_characters(t_game *game)
 {
 	int	i;

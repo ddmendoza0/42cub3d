@@ -1,5 +1,24 @@
 #include "cub3d.h"
 
+int	calculate_map_width(t_game *game)
+{
+	int	i;
+	int	len;
+	int	max_width;
+
+	max_width = 0;
+	i = 0;
+	while (i < game->map.height)
+	{
+		len = ft_strlen(game->map.grid[i]);
+		if (len > max_width)
+			max_width = len;
+		i++;
+	}
+	game->map.width = max_width;
+	return (1);
+}
+
 static char	*pad_line(char *line, int target_width)
 {
 	char	*padded;
@@ -83,7 +102,7 @@ static char	**convert_list_to_array(t_list *map_lines, int height)
 		grid[i] = ft_strdup((char *)current->content);
 		if (!grid[i])
 		{
-			while (i-- >= 0)
+			while (--i >= 0)
 				free(grid[i]);
 			free(grid);
 			return (NULL);
@@ -137,5 +156,11 @@ int	parse_map(int fd, t_game *game, char *first_line)
 	game->map.grid = convert_list_to_array(map_lines, height);
 	game->map.height = height;
 	ft_lstclear(&map_lines, free);
+	if (!game->map.grid)
+		return (0);
+	if (!calculate_map_width(game))
+		return (0);
+	if (!normalize_map(game))
+		return (printf("Error\nFailed to normalize map\n"), 0);
 	return (1);
 }
