@@ -86,13 +86,6 @@ static int	is_valid_position(char **map, int x, int y, t_game *game)
 		return (0);
 	if (x < 0 || x >= game->map.width)
 		return (0);
-	if (map[y][x] == ' ')
-	{
-		if (y == 0 || y == game->map.height - 1)
-			return (0);
-		if (x == 0 || x == game->map.width - 1)
-			return (0);
-	}
 	return (1);
 }
 
@@ -103,8 +96,14 @@ static int	flood_fill(char **map, int x, int y, t_game *game)
 	if (map[y][x] == '1' || map[y][x] == 'X')
 		return (1);
 	if (map[y][x] == ' ')
+	{
+		if (y == 0 || y == game->map.height - 1 ||
+			x == 0 || x == game->map.width - 1)
+			return (0);
 		return (1);
-	if (x == 0 || x == game->map.width - 1 || y == 0 || y == game->map.height - 1)
+	}
+	if (x == 0 || x == game->map.width - 1 ||
+		y == 0 || y == game->map.height - 1)
 		return (0);
 	map[y][x] = 'X';
 	if (!flood_fill(map, x + 1, y, game))
