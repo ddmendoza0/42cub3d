@@ -160,6 +160,10 @@ int	parse_map(int fd, t_game *game, char *first_line)
 		return (0);
 	if (!calculate_map_width(game))
 		return (0);
+	if (!validate_map_characters(game))
+		return (0);
+	if (!validate_map_closed(game))
+		return (0);
 	if (!normalize_map(game))
 		return (printf("Error\nFailed to normalize map\n"), 0);
 	return (1);
