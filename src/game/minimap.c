@@ -1,3 +1,5 @@
+#include "cub3d.h"
+
 static int	calculate_scale(t_game *game)
 {
 	int	scale_x;
