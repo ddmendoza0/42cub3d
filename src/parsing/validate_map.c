@@ -56,7 +56,7 @@ static char	**copy_map(t_game *game)
 		copy[i] = ft_strdup(game->map.grid[i]);
 		if (!copy[i])
 		{
-			while (i-- >= 0)
+			while (--i >= 0)
 				free(copy[i]);
 			free(copy);
 			return (NULL);
