@@ -24,10 +24,22 @@ static int	parse_texture(char *line, char **texture)
 	return (1);
 }
 
+static void	free_rgb_array(char **rgb)
+{
+	int	i;
+
+	i = 0;
+	while (rgb[i])
+		free(rgb[i++]);
+	free(rgb);
+}
+
 static int	parse_color(char *line, t_colors *colors, int is_floor)
 {
 	char	**rgb;
-	int		r, g, b;
+	int		r;
+	int		g;
+	int		b;
 
 	while (*line && *line != ' ')
 		line++;
@@ -36,10 +48,9 @@ static int	parse_color(char *line, t_colors *colors, int is_floor)
 	rgb = ft_split(line, ',');
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
 		return (0);
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	if (!validate_rgb_count(rgb))
+		return (0);
+	if (!validate_rgb_range(rgb, &r, &g, &b))
 		return (0);
 	if (is_floor)
 	{
@@ -53,10 +64,7 @@ static int	parse_color(char *line, t_colors *colors, int is_floor)
 		colors->ceiling_g = g;
 		colors->ceiling_b = b;
 	}
-	free(rgb[0]);
-	free(rgb[1]);
-	free(rgb[2]);
-	free(rgb);
+	free_rgb_array(rgb);
 	return (1);
 }
 
