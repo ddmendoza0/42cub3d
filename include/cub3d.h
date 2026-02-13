@@ -105,6 +105,7 @@ int		validate_map_characters(t_game *game);
 int		validate_map_closed(t_game *game);
 int		validate_rgb_count(char **rgb);
 int		validate_rgb_range(char **rgb, int *r, int *g, int *b);
+void	free_rgb_array(char **rgb);
 void	free_game(t_game *game);
 int		init_game(t_game *game);
 void	draw_loop(void *param);

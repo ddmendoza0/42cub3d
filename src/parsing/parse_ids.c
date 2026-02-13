@@ -24,16 +24,6 @@ static int	parse_texture(char *line, char **texture)
 	return (1);
 }
 
-static void	free_rgb_array(char **rgb)
-{
-	int	i;
-
-	i = 0;
-	while (rgb[i])
-		free(rgb[i++]);
-	free(rgb);
-}
-
 static int	parse_color(char *line, t_colors *colors, int is_floor)
 {
 	char	**rgb;

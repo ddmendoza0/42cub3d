@@ -32,7 +32,6 @@ int validate_texture_file(char* path)
 	return (1);
 }
 
-
 int	validate_rgb_count(char **rgb)
 {
 	int	count;

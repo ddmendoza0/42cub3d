@@ -24,6 +24,16 @@ static void	free_textures(t_textures *textures)
 	}
 }
 
+void	free_rgb_array(char **rgb)
+{
+	int	i;
+
+	i = 0;
+	while (rgb[i])
+		free(rgb[i++]);
+	free(rgb);
+}
+
 static void	free_map(t_map *map)
 {
 	int	i;
