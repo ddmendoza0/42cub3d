@@ -10,6 +10,11 @@
 # define BLOCK 64
 # define PI 3.14159265359
 
+//minimap
+# define MINIMAP_SIZE 200
+# define MINIMAP_SCALE 10
+# define MINIMAP_PADDING 20
+
 
 // --- LIBRARIES ---
 
@@ -109,6 +114,7 @@ void	free_rgb_array(char **rgb);
 void	free_game(t_game *game);
 int		init_game(t_game *game);
 void	draw_loop(void *param);
+void	draw_minimap(t_game* game);
 void	move_player(t_game *game, t_player *player);
 void	draw_line(t_game *game, double ray_angle, int screen_x);
 void	pixel_put(t_game *game, int x, int y, uint32_t color);

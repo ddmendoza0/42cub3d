@@ -64,4 +64,5 @@ void	draw_loop(void *param)
 		ray_angle += fraction;
 		i++;
 	}
+	draw_minimap(game);
 }
