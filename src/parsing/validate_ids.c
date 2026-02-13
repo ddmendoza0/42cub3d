@@ -31,3 +31,32 @@ int validate_texture_file(char* path)
 	close(fd);
 	return (1);
 }
+
+
+int	validate_rgb_count(char **rgb)
+{
+	int	count;
+
+	count = 0;
+	while (rgb[count])
+		count++;
+	if (count != 3)
+	{
+		free_rgb_array(rgb);
+		return (printf("Error\nRGB must have exactly 3 values\n"), 0);
+	}
+	return (1);
+}
+
+int	validate_rgb_range(char **rgb, int *r, int *g, int *b)
+{
+	*r = ft_atoi(rgb[0]);
+	*g = ft_atoi(rgb[1]);
+	*b = ft_atoi(rgb[2]);
+	if (*r < 0 || *r > 255 || *g < 0 || *g > 255 || *b < 0 || *b > 255)
+	{
+		free_rgb_array(rgb);
+		return (printf("Error\nRGB values must be in range [0-255]\n"), 0);
+	}
+	return (1);
+}

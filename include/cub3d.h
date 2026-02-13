@@ -103,6 +103,8 @@ int		parse_map(int fd, t_game *game, char *first_line);
 int		validate_texture_file(char *path);
 int		validate_map_characters(t_game *game);
 int		validate_map_closed(t_game *game);
+int		validate_rgb_count(char **rgb);
+int		validate_rgb_range(char **rgb, int *r, int *g, int *b);
 void	free_game(t_game *game);
 int		init_game(t_game *game);
 void	draw_loop(void *param);
