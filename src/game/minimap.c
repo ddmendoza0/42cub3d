@@ -19,8 +19,16 @@ static void	draw_minimap_tile(t_game *game, int x, int y, uint32_t color, int sc
 	int	screen_x;
 	int	screen_y;
 
-	screen_x = MINIMAP_PADDING + (x * scale);
-	screen_y = MINIMAP_PADDING + (y * scale);
+	screen_x = scale * x;
+	screen_y = scale * y;
+//
+//	screen_x = MINIMAP_PADDING + (x * scale);// x izquierda
+	screen_x += WIDTH - (game->map.width * scale + MINIMAP_PADDING);// x derecha
+//	screen_x += WIDTH / 2 - ((game->map.width * scale) / 2);// x centro
+//
+//	screen_y = MINIMAP_PADDING + (y * scale);// y arriba
+	screen_y += HEIGHT - (game->map.height * scale + MINIMAP_PADDING);// y abajo
+//	screen_y += HEIGHT / 2 - ((game->map.height * scale) / 2);// y centro
 	j = 0;
 	while (j < scale)
 	{

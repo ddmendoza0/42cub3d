@@ -11,7 +11,7 @@
 # define PI 3.14159265359
 
 //minimap
-# define MINIMAP_SIZE 200
+# define MINIMAP_SIZE 350
 # define MINIMAP_SCALE 10
 # define MINIMAP_PADDING 20
 
