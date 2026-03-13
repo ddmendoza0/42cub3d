@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_ids.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmendoza <dmendoza@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/13 10:16:31 by dmendoza          #+#    #+#             */
+/*   Updated: 2026/03/13 10:21:48 by dmendoza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	validate_identifiers(t_game *game)
@@ -17,14 +29,17 @@ int	validate_identifiers(t_game *game)
 	return (1);
 }
 
-int validate_texture_file(char* path)
+int	validate_texture_file(char *path)
 {
 	int	fd;
 	int	len;
 
 	len = ft_strlen(path);
 	if (len < 4 || ft_strncmp(path + len - 4, ".png", 4) != 0)
-		return (printf("Error\nTexture file must have .png extension: %s\n", path), 0);
+	{
+		printf("Error\nTexture file must have .png extension: %s\n", path);
+		return (0);
+	}
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (printf("Error\nCannot open texture file: %s\n", path), 0);

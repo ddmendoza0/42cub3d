@@ -6,7 +6,7 @@
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:26:35 by diespino          #+#    #+#             */
-/*   Updated: 2026/01/20 18:26:45 by diespino         ###   ########.fr       */
+/*   Updated: 2026/03/13 10:53:40 by dmendoza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	draw_col(double dist, int screen_x, int side, double wall_x, t_game* game)
 	double			tex_pos;
 	uint32_t		color;
 	int				y;
-
 
 	if (side == 0)
 	{
@@ -127,9 +126,9 @@ static int	grid_move(t_game *game)
 {
 	bool	hit;
 	int		side;
-	
+
 	hit = false;
-	while(!hit)
+	while (!hit)
 	{
 		if (game->rcast.side_dist_x < game->rcast.side_dist_y)
 		{
@@ -154,26 +153,22 @@ static void	grid_pos_init(t_game *game)
 	if (game->rcast.ray_x < 0)
 	{
 		game->rcast.step_x = -1;
-		game->rcast.side_dist_x = (game->player.x - game->rcast.map_x
-			* BLOCK) / fabs(game->rcast.ray_x);
+		game->rcast.side_dist_x = (game->player.x - game->rcast.map_x * BLOCK) / fabs(game->rcast.ray_x);
 	}
 	else
 	{
 		game->rcast.step_x = 1;
-		game->rcast.side_dist_x = ((game->rcast.map_x + 1)
-			* BLOCK - game->player.x) / fabs(game->rcast.ray_x);
+		game->rcast.side_dist_x = ((game->rcast.map_x + 1) * BLOCK - game->player.x) / fabs(game->rcast.ray_x);
 	}
 	if (game->rcast.ray_y < 0)
 	{
 		game->rcast.step_y = -1;
-		game->rcast.side_dist_y = (game->player.y - game->rcast.map_y
-			* BLOCK) / fabs(game->rcast.ray_y);
+		game->rcast.side_dist_y = (game->player.y - game->rcast.map_y * BLOCK) / fabs(game->rcast.ray_y);
 	}
 	else
 	{
 		game->rcast.step_y = 1;
-		game->rcast.side_dist_y = ((game->rcast.map_y + 1)
-			* BLOCK - game->player.y) / fabs(game->rcast.ray_y);
+		game->rcast.side_dist_y = ((game->rcast.map_y + 1) * BLOCK - game->player.y) / fabs(game->rcast.ray_y);
 	}
 }
 

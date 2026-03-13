@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmendoza <dmendoza@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/13 10:22:29 by dmendoza          #+#    #+#             */
+/*   Updated: 2026/03/13 10:30:05 by dmendoza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	is_valid_char(char c)
 {
-	return (c == '0' || c == '1' || c == 'N' || c == 'S' 
-		|| c == 'E' || c == 'W' || c == ' ');
+	return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ');
 }
 
 static int	is_player(char c)
@@ -121,8 +132,7 @@ int	validate_map_closed(t_game *game)
 	map_copy = copy_map(game);
 	if (!map_copy)
 		return (0);
-	result = flood_fill(map_copy, (int)game->player.x, 
-		(int)game->player.y, game);
+	result = flood_fill(map_copy, (int)game->player.x, (int)game->player.y, game);
 	free_map_copy(map_copy, game->map.height);
 	if (!result)
 		return (printf("Error\nMap is not closed by walls\n"), 0);

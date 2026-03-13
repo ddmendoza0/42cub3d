@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_ids.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmendoza <dmendoza@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/13 10:22:06 by dmendoza          #+#    #+#             */
+/*   Updated: 2026/03/13 10:25:31 by dmendoza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	parse_texture(char *line, char **texture)
@@ -21,40 +33,6 @@ static int	parse_texture(char *line, char **texture)
 		return (0);
 	}
 	*texture = path;
-	return (1);
-}
-
-static int	parse_color(char *line, t_colors *colors, int is_floor)
-{
-	char	**rgb;
-	int		r;
-	int		g;
-	int		b;
-
-	while (*line && *line != ' ')
-		line++;
-	while (*line && *line == ' ')
-		line++;
-	rgb = ft_split(line, ',');
-	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
-		return (0);
-	if (!validate_rgb_count(rgb))
-		return (0);
-	if (!validate_rgb_range(rgb, &r, &g, &b))
-		return (0);
-	if (is_floor)
-	{
-		colors->floor_r = r;
-		colors->floor_g = g;
-		colors->floor_b = b;
-	}
-	else
-	{
-		colors->ceiling_r = r;
-		colors->ceiling_g = g;
-		colors->ceiling_b = b;
-	}
-	free_rgb_array(rgb);
 	return (1);
 }
 

@@ -103,6 +103,7 @@ typedef struct s_game
 int		main(int argc, char **argv);
 int		parse_cub_file(char *filename, t_game *game);
 int		parse_identifier(char *line, t_game *game);
+int		parse_color(char *line, t_colors *colors, int is_floor);
 int		validate_identifiers(t_game *game);
 int		parse_map(int fd, t_game *game, char *first_line);
 int		validate_texture_file(char *path);

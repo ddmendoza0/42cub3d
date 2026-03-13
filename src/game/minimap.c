@@ -1,15 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmendoza <dmendoza@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/13 10:42:46 by dmendoza          #+#    #+#             */
+/*   Updated: 2026/03/13 10:46:46 by dmendoza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	calculate_scale(t_game *game)
 {
 	int	scale_x;
 	int	scale_y;
+	int	scale;
 
 	scale_x = (MINIMAP_SIZE - 10) / game->map.width;
 	scale_y = (MINIMAP_SIZE - 10) / game->map.height;
 	if (scale_x < scale_y)
-		return (scale_x < 1 ? 1 : scale_x);
-	return (scale_y < 1 ? 1 : scale_y);
+		scale = scale_x;
+	else
+		scale = scale_y;
+	if (scale < 1)
+		scale = 1;
+	return (scale);
 }
 
 static void	draw_minimap_tile(t_game *game, int x, int y, uint32_t color, int scale)
@@ -21,14 +38,8 @@ static void	draw_minimap_tile(t_game *game, int x, int y, uint32_t color, int sc
 
 	screen_x = scale * x;
 	screen_y = scale * y;
-//
-//	screen_x = MINIMAP_PADDING + (x * scale);// x izquierda
-	screen_x += WIDTH - (game->map.width * scale + MINIMAP_PADDING);// x derecha
-//	screen_x += WIDTH / 2 - ((game->map.width * scale) / 2);// x centro
-//
-//	screen_y = MINIMAP_PADDING + (y * scale);// y arriba
-	screen_y += HEIGHT - (game->map.height * scale + MINIMAP_PADDING);// y abajo
-//	screen_y += HEIGHT / 2 - ((game->map.height * scale) / 2);// y centro
+	screen_x += WIDTH - (game->map.width * scale + MINIMAP_PADDING);
+	screen_y += HEIGHT - (game->map.height * scale + MINIMAP_PADDING);
 	j = 0;
 	while (j < scale)
 	{
@@ -53,7 +64,7 @@ void	draw_minimap(t_game *game)
 	int			scale;
 
 	if (!game || !game->map.grid || game->map.height == 0)
-		return;
+		return ;
 	scale = calculate_scale(game);
 	player_x = (int)(game->player.x / BLOCK);
 	player_y = (int)(game->player.y / BLOCK);

@@ -1,43 +1,80 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_file.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmendoza <dmendoza@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/13 08:35:55 by dmendoza          #+#    #+#             */
+/*   Updated: 2026/03/13 10:15:35 by dmendoza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	parse_cub_file(char *filename, t_game *game)
+static int	check_extension(char *filename)
 {
-	int		fd;
-	char	*line;
-
 	if (!ft_strnstr(filename, ".cub", ft_strlen(filename)))
 	{
 		printf("Error\nFile must have .cub extension\n");
 		return (0);
 	}
+	return (1);
+}
+
+static char	*parse_identifiers_loop(int fd, t_game *game)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (line[0] == '1' || line[0] == ' ')
+			return (line);
+		if (!parse_identifier(line, game))
+		{
+			free(line);
+			return (NULL);
+		}
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (line);
+}
+
+static int	parse_sections(int fd, t_game *game)
+{
+	char	*line;
+
+	line = parse_identifiers_loop(fd, game);
+	if (!line & !validate_identifiers(game))
+		return (0);
+	if (!validate_identifiers(game))
+	{
+		free(line);
+		return (0);
+	}
+	if (!parse_map(fd, game, line))
+	{
+		free(line);
+		return (0);
+	}
+	return (1);
+}
+
+int	parse_cub_file(char *filename, t_game *game)
+{
+	int		fd;
+
+	if (!check_extension(filename))
+		return (0);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
 		printf("Error\nCannot open file: %s\n", filename);
 		return (0);
 	}
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (line[0] == '1' || line[0] == ' ')
-			break;
-		if (!parse_identifier(line, game))
-		{
-			free(line);
-			close(fd);
-			return (0);
-		}
-		free(line);
-		line = get_next_line(fd);
-	}
-	if (!validate_identifiers(game))
-	{
-		close(fd);
-		free_game(game);
-		return (0);
-	}
-	if (!parse_map(fd, game, line))
+	if (!parse_sections(fd, game))
 	{
 		close(fd);
 		free_game(game);

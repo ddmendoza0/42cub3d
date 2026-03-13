@@ -30,6 +30,7 @@ PARSING_FILES	=	$(PARSING_DIR)parse_file.c\
 					$(PARSING_DIR)validate_ids.c\
 					$(PARSING_DIR)parse_map.c\
 					$(PARSING_DIR)validate_map.c\
+					$(PARSING_DIR)parse_colors.c
 
 UTILS_DIR		=	$(SRC_DIR)utils/
 UTILS_FILES		=	$(UTILS_DIR)free.c\

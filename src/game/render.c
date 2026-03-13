@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmendoza <dmendoza@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/13 10:54:01 by dmendoza          #+#    #+#             */
+/*   Updated: 2026/03/13 10:57:35 by dmendoza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -8,35 +19,37 @@ void	pixel_put(t_game *game, int x, int y, uint32_t color)
 	mlx_put_pixel(game->img, x, y, color);
 }
 
+static uint32_t	get_row_color(t_game *game, int y)
+{
+	if (y < HEIGHT / 2)
+		return ((game->colors.ceiling_r << 24)
+			| (game->colors.ceiling_g << 16)
+			| (game->colors.ceiling_b << 8) | 0xFF);
+	return ((game->colors.floor_r << 24)
+		| (game->colors.floor_g << 16)
+		| (game->colors.floor_b << 8) | 0xFF);
+}
+
+static void	fill_row(t_game *game, int y, uint32_t color)
+{
+	int	x;
+
+	x = 0;
+	while (x < WIDTH)
+	{
+		pixel_put(game, x, y, color);
+		x++;
+	}
+}
+
 void	clear_img(t_game *game)
 {
-	int			x;
-	int			y;
-	uint32_t	color;
+	int	y;
 
 	y = 0;
 	while (y < HEIGHT)
 	{
-		x = 0;
-		if (y < HEIGHT / 2)
-		{
-			color = (game->colors.ceiling_r << 24) 
-				| (game->colors.ceiling_g << 16) 
-				| (game->colors.ceiling_b << 8) 
-				| 0xFF;
-		}
-		else
-		{
-			color = (game->colors.floor_r << 24) 
-				| (game->colors.floor_g << 16) 
-				| (game->colors.floor_b << 8) 
-				| 0xFF;
-		}
-		while (x < WIDTH)
-		{
-			pixel_put(game, x, y, color);
-			x++;
-		}
+		fill_row(game, y, get_row_color(game, y));
 		y++;
 	}
 }

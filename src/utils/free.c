@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmendoza <dmendoza@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/13 10:40:23 by dmendoza          #+#    #+#             */
+/*   Updated: 2026/03/13 10:40:42 by dmendoza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static void	free_textures(t_textures *textures)
@@ -39,7 +51,7 @@ static void	free_map(t_map *map)
 	int	i;
 
 	if (!map->grid)
-		return;
+		return ;
 	i = 0;
 	while (i < map->height)
 	{
@@ -57,7 +69,7 @@ static void	free_map(t_map *map)
 void	free_game(t_game *game)
 {
 	if (!game)
-		return;
+		return ;
 	free_textures(&game->textures);
 	free_map(&game->map);
 	if (game->tex_north)
