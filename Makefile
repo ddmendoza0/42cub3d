@@ -21,8 +21,8 @@ GAME_FILES		=	$(GAME_DIR)player_move.c\
 					$(GAME_DIR)init_game.c\
 					$(GAME_DIR)render.c\
 					$(GAME_DIR)load_textures.c\
-					$(GAME_DIR)minimap.c
-#					$(GAME_DIR)test2.c
+					$(GAME_DIR)minimap.c\
+					$(GAME_DIR)key_hook.c
 					
 PARSING_DIR		=	$(SRC_DIR)parsing/
 PARSING_FILES	=	$(PARSING_DIR)parse_file.c\

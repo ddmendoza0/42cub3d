@@ -121,5 +121,6 @@ void	draw_line(t_game *game, double ray_angle, int screen_x);
 void	pixel_put(t_game *game, int x, int y, uint32_t color);
 void	clear_img(t_game *game);
 int		load_textures(t_game *game);
+void	key_callback(mlx_key_data_t keydata, void *param);
 
 #endif

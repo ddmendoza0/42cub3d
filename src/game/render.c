@@ -64,8 +64,9 @@ void	draw_loop(void *param)
 
 	game = (t_game *)param;
 	player = &game->player;
-	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))// mantener pulsado
 		mlx_close_window(game->mlx);
+	mlx_key_hook(game->mlx, key_callback, game);// solo presion una vez
 	move_player(game, player);
 	clear_img(game);
 	fraction = (PI / 3.0) / (double)WIDTH;

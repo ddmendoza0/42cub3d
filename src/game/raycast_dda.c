@@ -121,7 +121,6 @@ double	grid_dist(t_game *game, int side, double ray_angle)
 	return (dist);
 }
 
-// Falta DEBUG --> pixel_put(game, (int)ray_x, (int)ray_y, 0xFF0000FF);
 static int	grid_move(t_game *game)
 {
 	bool	hit;
@@ -142,8 +141,13 @@ static int	grid_move(t_game *game)
 			game->rcast.map_y += game->rcast.step_y;
 			side = 1;
 		}
-		if (game->map.grid[game->rcast.map_y][game->rcast.map_x] == '1')
+		if (game->map.grid[game->rcast.map_y][game->rcast.map_x] == '1' ||
+			game->map.grid[game->rcast.map_y][game->rcast.map_x] == 'E')
 			hit = true;
+//		Aqui detecta que 'E' es pared y le pone la textura de pared (hay que cambiarlo)
+//		Habria que detectar el tipo de 'bloque':
+//			Si es pared --> todo igual
+//		 	Si es puerta -> en draw_col se deberia poner la textura
 	}
 	return (side);
 }

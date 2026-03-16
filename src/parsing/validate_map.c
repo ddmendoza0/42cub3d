@@ -17,9 +17,11 @@ static int	is_valid_char(char c)
 	return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ');
 }
 
+
 static int	is_player(char c)
 {
-	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+	return (c == 'N');// || c == 'S' || c == 'E' || c == 'W');
+// 	Reconoce solo 'N' como player, 'E' es puerta cerrarda y 'W' abierta
 }
 
 int	validate_map_characters(t_game *game)
