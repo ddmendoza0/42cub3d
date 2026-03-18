@@ -46,5 +46,6 @@ int	init_game(t_game *game)
 		mlx_terminate(game->mlx);
 		return (0);
 	}
+	mlx_key_hook(game->mlx, key_callback, game);
 	return (1);
 }
