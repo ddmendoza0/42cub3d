@@ -107,7 +107,7 @@ static int	flood_fill(char **map, int x, int y, t_game *game)
 {
 	if (!is_valid_position(map, x, y, game))
 		return (0);
-	if (map[y][x] == '1' || map[y][x] == 'X')
+	if (map[y][x] == '1' || map[y][x] == 'X' || map[y][x] == 'D')
 		return (1);
 	if (map[y][x] == ' ')
 		return (0);
