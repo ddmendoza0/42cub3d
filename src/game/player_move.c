@@ -21,8 +21,7 @@ bool	touch(double ray_x, double ray_y, t_game *game)
 	y = (int)(ray_y / BLOCK);
 	if (y < 0 || x < 0 || !game->map.grid[y] || !game->map.grid[y][x])
 		return (true);
-	return (game->map.grid[y][x] == '1' || game->map.grid[y][x] == 'E');
-//	Detecta como 'no traspasables' las paredes y las puertas
+	return (game->map.grid[y][x] == '1' || game->map.grid[y][x] == 'D');
 }
 
 static void	move_forward_backward(double dir_x, double dir_y, t_game *game)

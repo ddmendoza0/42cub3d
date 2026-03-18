@@ -27,10 +27,10 @@ void	open_door(t_game *game, t_player *player)
 	if (grid_y < 0 || grid_y >= game->map.height ||
 		grid_x < 0 || grid_x >= game->map.width)
 		return ;
-	if (game->map.grid[grid_y][grid_x] == 'E')
-		game->map.grid[grid_y][grid_x] = 'W';
-	else if (game->map.grid[grid_y][grid_x] == 'W')
-		game->map.grid[grid_y][grid_x] = 'E';
+	if (game->map.grid[grid_y][grid_x] == 'D')
+		game->map.grid[grid_y][grid_x] = 'O';
+	else if (game->map.grid[grid_y][grid_x] == 'O')
+		game->map.grid[grid_y][grid_x] = 'D';
 }
 
 void	key_callback(mlx_key_data_t keydata, void *param)

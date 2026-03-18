@@ -47,7 +47,7 @@ static int	parse_sections(int fd, t_game *game)
 	char	*line;
 
 	line = parse_identifiers_loop(fd, game);
-	if (!line & !validate_identifiers(game))
+	if (!line && !validate_identifiers(game))
 		return (0);
 	if (!validate_identifiers(game))
 	{

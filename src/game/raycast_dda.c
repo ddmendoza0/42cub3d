@@ -142,7 +142,7 @@ static int	grid_move(t_game *game)
 			side = 1;
 		}
 		if (game->map.grid[game->rcast.map_y][game->rcast.map_x] == '1' ||
-			game->map.grid[game->rcast.map_y][game->rcast.map_x] == 'E')
+			game->map.grid[game->rcast.map_y][game->rcast.map_x] == 'D')
 			hit = true;
 //		Aqui detecta que 'E' es pared y le pone la textura de pared (hay que cambiarlo)
 //		Habria que detectar el tipo de 'bloque':
