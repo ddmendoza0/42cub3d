@@ -97,6 +97,7 @@ typedef struct s_game
 	int			has_east;
 	int			has_floor;
 	int			has_ceiling;
+	int         has_door;
 }	t_game;
 
 
