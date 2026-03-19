@@ -35,6 +35,7 @@ typedef struct s_textures
 	char	*south;
 	char	*west;
 	char	*east;
+	char    *door;
 }	t_textures;
 
 typedef struct s_colors
@@ -89,6 +90,7 @@ typedef struct s_game
 	mlx_texture_t	*tex_south;
 	mlx_texture_t	*tex_east;
 	mlx_texture_t	*tex_west;
+	mlx_texture_t   *tex_door;  
 	int			has_north;
 	int			has_south;
 	int			has_west;
@@ -117,6 +119,7 @@ int		init_game(t_game *game);
 void	draw_loop(void *param);
 void	draw_minimap(t_game* game);
 void	move_player(t_game *game, t_player *player);
+void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_game *game);
 void	draw_line(t_game *game, double ray_angle, int screen_x);
 void	pixel_put(t_game *game, int x, int y, uint32_t color);
 void	clear_img(t_game *game);

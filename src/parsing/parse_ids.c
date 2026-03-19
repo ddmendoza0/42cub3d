@@ -106,5 +106,12 @@ int	parse_identifier(char *line, t_game *game)
 	result = parse_floor_ceiling(line, game);
 	if (result != -1)
 		return (result);
+	if (ft_strncmp(line, "DO ", 3) == 0)
+	{
+		if (game->has_door)
+			return (printf("Error\nDuplicate identifier: DO\n"), 0);
+		game->has_door = 1;
+		return (parse_texture(line, &game->textures.door));
+	}
 	return (1);
 }

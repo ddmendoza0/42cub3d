@@ -34,6 +34,11 @@ static void	free_textures(t_textures *textures)
 		free(textures->east);
 		textures->east = NULL;
 	}
+	if (textures->door)
+	{
+		free(textures->door);
+		textures->door = NULL;
+	}
 }
 
 void	free_rgb_array(char **rgb)
@@ -80,4 +85,6 @@ void	free_game(t_game *game)
 		mlx_delete_texture(game->tex_east);
 	if (game->tex_west)
 		mlx_delete_texture(game->tex_west);
+	if (game->tex_door)
+		mlx_delete_texture(game->tex_door);
 }

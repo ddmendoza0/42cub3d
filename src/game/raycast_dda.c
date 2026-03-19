@@ -34,7 +34,7 @@ void	draw_col(double dist, int color, int screen_x, t_game *game)
 		start_y++;
 	}
 }*/
-void	draw_col(double dist, int screen_x, int side, double wall_x, t_game* game)
+void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_game* game)
 {
 	mlx_texture_t	*texture;
 	double			dist_plane;
@@ -48,6 +48,22 @@ void	draw_col(double dist, int screen_x, int side, double wall_x, t_game* game)
 	uint32_t		color;
 	int				y;
 
+	if (block == 'D')
+		texture = game->tex_door;
+	else if (side == 0)
+	{
+		if (game->rcast.ray_x > 0)
+			texture = game->tex_east;
+		else
+			texture = game->tex_west;
+	}
+	else
+	{
+		if (game->rcast.ray_y > 0)
+			texture = game->tex_south;
+		else
+			texture = game->tex_north;
+	}
 	if (side == 0)
 	{
 		if (game->rcast.ray_x > 0)
@@ -144,7 +160,7 @@ static int	grid_move(t_game *game)
 		if (game->map.grid[game->rcast.map_y][game->rcast.map_x] == '1' ||
 			game->map.grid[game->rcast.map_y][game->rcast.map_x] == 'D')
 			hit = true;
-//		Aqui detecta que 'E' es pared y le pone la textura de pared (hay que cambiarlo)
+//		Aqui detecta que 'D' es pared y le pone la textura de pared (hay que cambiarlo)
 //		Habria que detectar el tipo de 'bloque':
 //			Si es pared --> todo igual
 //		 	Si es puerta -> en draw_col se deberia poner la textura
@@ -204,6 +220,7 @@ void	draw_line(t_game *game, double ray_angle, int screen_x)
 	int		side;
 	double	dist;
 	double	wall_x;
+	char	block;
 
 	game->rcast.map_x = (int)(game->player.x / BLOCK);
 	game->rcast.map_y = (int)(game->player.y / BLOCK);
@@ -214,11 +231,12 @@ void	draw_line(t_game *game, double ray_angle, int screen_x)
 	grid_pos_init(game);
 	side = grid_move(game);
 	dist = grid_dist(game, side, ray_angle);
+	block = game->map.grid[game->rcast.map_y][game->rcast.map_x];
 	if (side == 0)
 		wall_x = game->player.y + dist * game->rcast.ray_y;
 	else
 		wall_x = game->player.x + dist * game->rcast.ray_x;
 	wall_x = wall_x / BLOCK;
 	wall_x -= floor(wall_x);
-	draw_col(dist, screen_x, side, wall_x, game);
+	draw_col(dist, screen_x, side, wall_x, block, game);
 }
