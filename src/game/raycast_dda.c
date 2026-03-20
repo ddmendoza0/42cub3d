@@ -65,7 +65,7 @@ void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_
 	else
 		texture = get_wall_texture(game, side);
 	proj.height = (BLOCK / dist) * ((WIDTH / 2.0) / tan(PI / 6.0));
-	proj.start_y = (int)((proj.height - proj.height) / 2.0);
+	proj.start_y = (int)((HEIGHT - proj.height) / 2.0);
 	proj.end_y = (int)(proj.start_y + proj.height);
 	proj.side = side;
 	init_texdata(&td, texture, wall_x, &proj, game);
