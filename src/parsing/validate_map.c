@@ -103,26 +103,68 @@ static int	is_valid_position(char **map, int x, int y, t_game *game)
 	return (1);
 }
 
-static int	flood_fill(char **map, int x, int y, t_game *game)
+static int	push_neighbors(t_point *stack, int *top, t_point cur)
 {
-	if (!is_valid_position(map, x, y, game))
-		return (0);
-	if (map[y][x] == '1' || map[y][x] == 'X' || map[y][x] == 'D')
-		return (1);
-	if (map[y][x] == ' ')
-		return (0);
-	if (x == 0 || y == 0 || y == game->map.height - 1)
-		return (0);
-	map[y][x] = 'X';
-	if (!flood_fill(map, x + 1, y, game))
-		return (0);
-	if (!flood_fill(map, x - 1, y, game))
-		return (0);
-	if (!flood_fill(map, x, y + 1, game))
-		return (0);
-	if (!flood_fill(map, x, y - 1, game))
-		return (0);
+	int	dirs[4][2];
+	int	i;
+
+	dirs[0][0] = 1;  dirs[0][1] = 0;
+	dirs[1][0] = -1; dirs[1][1] = 0;
+	dirs[2][0] = 0;  dirs[2][1] = 1;
+	dirs[3][0] = 0;  dirs[3][1] = -1;
+	i = 0;
+	while (i < 4)
+	{
+		stack[*top].x = cur.x + dirs[i][0];
+		stack[*top].y = cur.y + dirs[i][1];
+		(*top)++;
+		i++;
+	}
 	return (1);
+}
+
+static int	process_cell(char **map, t_point cur, t_game *game,
+				t_point *stack, int *top)
+{
+	if (!is_valid_position(map, cur.x, cur.y, game))
+		return (0);
+	if (map[cur.y][cur.x] == '1' || map[cur.y][cur.x] == 'X'
+		|| map[cur.y][cur.x] == 'D')
+		return (1);
+	if (map[cur.y][cur.x] == ' ')
+		return (0);
+	if (cur.x == 0 || cur.y == 0 || cur.y == game->map.height - 1)
+		return (0);
+	map[cur.y][cur.x] = 'X';
+	push_neighbors(stack, top, cur);
+	return (1);
+}
+
+static int	flood_fill(char **map, int start_x, int start_y, t_game *game)
+{
+	t_point	*stack;
+	t_point	cur;
+	int		top;
+	int		max;
+	int		result;
+
+	max = game->map.width * game->map.height;
+	stack = malloc(sizeof(t_point) * max);
+	if (!stack)
+		return (0);
+	top = 0;
+	stack[top].x = start_x;
+	stack[top].y = start_y;
+	top++;
+	result = 1;
+	while (top > 0 && result)
+	{
+		top--;
+		cur = stack[top];
+		result = process_cell(map, cur, game, stack, &top);
+	}
+	free(stack);
+	return (result);
 }
 
 int	validate_map_closed(t_game *game)
