@@ -12,6 +12,27 @@
 
 #include "cub3d.h"
 
+
+static int	map_has_doors(t_game *game)
+{
+    int	i;
+    int	j;
+
+    i = 0;
+    while (i < game->map.height)
+    {
+        j = 0;
+        while (game->map.grid[i][j])
+        {
+            if (game->map.grid[i][j] == 'D')
+                return (1);
+            j++;
+        }
+        i++;
+    }
+    return (0);
+}
+
 int	calculate_map_width(t_game *game)
 {
 	int	i;
