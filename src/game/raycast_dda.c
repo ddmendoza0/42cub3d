@@ -12,28 +12,6 @@
 
 #include "cub3d.h"
 
-/*
-void	draw_col(double dist, int color, int screen_x, t_game *game)
-{
-	double	dist_plane;
-	double	height;
-	int	start_y;
-	int	end_y;
-
-	dist_plane = (WIDTH / 2.0) / tan(PI / 6.0);
-	height = (BLOCK / dist) * dist_plane;
-	start_y = (int)((HEIGHT - height) / 2.0);
-	end_y = (int)(start_y + height);
-	if (start_y < 0)
-		start_y = 0;
-	if (end_y > HEIGHT)
-		end_y = HEIGHT;
-	while (start_y < end_y)
-	{
-		pixel_put(game, screen_x, start_y, color);
-		start_y++;
-	}
-}*/
 void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_game* game)
 {
 	mlx_texture_t	*texture;
@@ -64,20 +42,6 @@ void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_
 		else
 			texture = game->tex_north;
 	}
-/*	if (side == 0)
-	{
-		if (game->rcast.ray_x > 0)
-			texture = game->tex_east;
-		else
-			texture = game->tex_west;
-	}
-	else
-	{
-		if (game->rcast.ray_y > 0)
-			texture = game->tex_south;
-		else
-			texture = game->tex_north;
-	}*/
 	dist_plane = (WIDTH / 2.0) / tan(PI / 6.0);
 	height = (BLOCK / dist) * dist_plane;
 	start_y = (int)((HEIGHT - height) / 2.0);
@@ -102,24 +66,6 @@ void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_
 		y++;
 	}
 }
-
-/*static int	get_wall_text(t_game* game, int side)
-{
-	if(side == 0)
-	{
-		if (game->rcast.ray_x > 0)
-			return (0x0000FFFF);// EAST [BLUE];
-		else
-			return (0xFF0000FF);// WEST [RED]
-	}
-	else
-	{
-		if (game->rcast.ray_y > 0)
-			return (0x00FFFFFF);// SOUTH [LIGTH BLUE]
-		else
-			return (0x00FF00FF);// NORTH [GREEN]
-	}
-}*/
 
 double	grid_dist(t_game *game, int side, double ray_angle)
 {
@@ -160,10 +106,6 @@ static int	grid_move(t_game *game)
 		if (game->map.grid[game->rcast.map_y][game->rcast.map_x] == '1' ||
 			game->map.grid[game->rcast.map_y][game->rcast.map_x] == 'D')
 			hit = true;
-//		Aqui detecta que 'D' es pared y le pone la textura de pared (hay que cambiarlo)
-//		Habria que detectar el tipo de 'bloque':
-//			Si es pared --> todo igual
-//		 	Si es puerta -> en draw_col se deberia poner la textura
 	}
 	return (side);
 }
@@ -192,29 +134,6 @@ static void	grid_pos_init(t_game *game)
 	}
 }
 
-/*void	draw_line(t_game* game, double ray_angle, int screen_x)
-{
-	int		side;
-	int		color;
-	double	dist;
-
-	game->rcast.map_x = (int)(game->player.x / BLOCK);
-	game->rcast.map_y = (int)(game->player.y/ BLOCK);
-	game->rcast.ray_x = cos(ray_angle);
-	game->rcast.ray_y = sin(ray_angle);
-	game->rcast.dist_x = fabs(BLOCK / game->rcast.ray_x);
-	game->rcast.dist_y = fabs(BLOCK / game->rcast.ray_y);
-//	Caculo de primera intersecciones de la grid
-	grid_pos_init(game);
-//	Movimiento en grid hasta pared
-	side = grid_move(game);
-//	distancia perfecta al muro y sin ojo de pez
-	dist = grid_dist(game, side, ray_angle);
-//	colore pared
-	color = get_wall_text(game, side);
-//	dibujo de columnas
-	draw_col(dist, color, screen_x, game);
-}*/
 void	draw_line(t_game *game, double ray_angle, int screen_x)
 {
 	int		side;
