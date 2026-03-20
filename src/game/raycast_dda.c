@@ -64,7 +64,7 @@ void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_
 		else
 			texture = game->tex_north;
 	}
-	if (side == 0)
+/*	if (side == 0)
 	{
 		if (game->rcast.ray_x > 0)
 			texture = game->tex_east;
@@ -77,7 +77,7 @@ void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_
 			texture = game->tex_south;
 		else
 			texture = game->tex_north;
-	}
+	}*/
 	dist_plane = (WIDTH / 2.0) / tan(PI / 6.0);
 	height = (BLOCK / dist) * dist_plane;
 	start_y = (int)((HEIGHT - height) / 2.0);
