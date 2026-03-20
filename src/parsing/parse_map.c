@@ -141,7 +141,10 @@ int	parse_map(int fd, t_game *game, char *first_line)
 	{
 		new_node = ft_lstnew(first_line);
 		if (!new_node)
+		{
+			free(first_line);
 			return (0);
+		}
 		ft_lstadd_back(&map_lines, new_node);
 		height++;
 	}
@@ -152,13 +155,18 @@ int	parse_map(int fd, t_game *game, char *first_line)
 		{
 			new_node = ft_lstnew(line);
 			if (!new_node)
+			{
+				free(line);
+				ft_lstclear(&map_lines, free);
 				return (0);
+			}
 			ft_lstadd_back(&map_lines, new_node);
 			height++;
 		}
 		else if (line[0] != '\n' && map_lines != NULL)
 		{
 			free(line);
+			ft_lstclear(&map_lines, free);
 			return (printf("Error\nInvalid map format\n"), 0);
 		}
 		else
