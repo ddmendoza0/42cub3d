@@ -4,8 +4,8 @@ WE ./assets/textures/west.png
 EA ./assets/textures/east.png
 DO ./assets/textures/door.png
 
-F 60,65,70
-C 20,25,35
+F 120,85,50
+C 100,160,220
 
         1111111111111111111111111
         1000000000110000000000001
