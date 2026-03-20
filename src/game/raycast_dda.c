@@ -40,17 +40,23 @@ static mlx_texture_t	*get_wall_texture(t_game *game, int side)
 	return (game->tex_north);
 }
 
-void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_game* game)
+static void	init_texdata(t_texdata *td, mlx_texture_t *tex, double wall_x, t_proj *proj, t_game *game)
+{
+	td->tex_x = (int)(wall_x * (double)tex->width);
+	if ((proj->side == 0 && game->rcast.ray_x < 0)
+		|| (proj->side == 1 && game->rcast.ray_y < 0))
+		td->tex_x = tex->width - td->tex_x - 1;
+	td->step = (double)tex->height / proj->height;
+	td->tex_pos = (proj->start_y - HEIGHT / 2.0 + proj->height / 2.0) * td->step;
+	if (proj->start_y < 0)
+		td->tex_pos += (-proj->start_y) * td->step;
+}
+
+void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_game *game)
 {
 	mlx_texture_t	*texture;
-	double			dist_plane;
-	double			height;
-	int				start_y;
-	int				end_y;
-	int				tex_x;
-	int				tex_y;
-	double			step;
-	double			tex_pos;
+	t_texdata		td;
+	t_proj			proj;
 	uint32_t		color;
 	int				y;
 
@@ -58,26 +64,20 @@ void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_
 		texture = get_door_texture(game, side);
 	else
 		texture = get_wall_texture(game, side);
-	dist_plane = (WIDTH / 2.0) / tan(PI / 6.0);
-	height = (BLOCK / dist) * dist_plane;
-	start_y = (int)((HEIGHT - height) / 2.0);
-	end_y = (int)(start_y + height);
-	tex_x = (int)(wall_x * (double)texture->width);
-	if ((side == 0 && game->rcast.ray_x < 0) || (side == 1 && game->rcast.ray_y < 0))
-		tex_x = texture->width - tex_x - 1;
-	step = (double)texture->height / height;
-	tex_pos = (start_y - HEIGHT / 2.0 + height / 2.0) * step;
-	if (start_y < 0)
+	proj.height = (BLOCK / dist) * ((WIDTH / 2.0) / tan(PI / 6.0));
+	proj.start_y = (int)((proj.height - proj.height) / 2.0);
+	proj.end_y = (int)(proj.start_y + proj.height);
+	proj.side = side;
+	init_texdata(&td, texture, wall_x, &proj, game);
+	if (proj.start_y < 0)
 		y = 0;
 	else
-		y = start_y;
-	if (start_y < 0)
-		tex_pos += (-start_y) * step;
-	while (y < end_y && y < HEIGHT)
+		y = proj.start_y;
+	while (y < proj.end_y && y < HEIGHT)
 	{
-		tex_y = (int)tex_pos & (texture->height - 1);
-		tex_pos += step;
-		color = ((uint32_t *)texture->pixels)[tex_y * texture->width + tex_x];
+		td.tex_y = (int)td.tex_pos & (texture->height - 1);
+		td.tex_pos += td.step;
+		color = ((uint32_t *)texture->pixels)[td.tex_y * texture->width + td.tex_x];
 		pixel_put(game, screen_x, y, color);
 		y++;
 	}

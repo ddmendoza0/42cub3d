@@ -61,6 +61,22 @@ typedef struct s_point
 	int	y;
 }	t_point;
 
+typedef struct s_texdata
+{
+	int		tex_x;
+	int		tex_y;
+	double	step;
+	double	tex_pos;
+}	t_texdata;
+
+typedef struct s_proj
+{
+	double	height;
+	int		start_y;
+	int		end_y;
+	int		side;
+}	t_proj;
+
 typedef struct s_player
 {
 	double	x;
