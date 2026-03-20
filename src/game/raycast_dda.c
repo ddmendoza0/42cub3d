@@ -12,6 +12,34 @@
 
 #include "cub3d.h"
 
+static mlx_texture_t	*get_door_texture(t_game *game, int side)
+{
+	if (game->tex_door)
+		return (game->tex_door);
+	if (side == 0)
+	{
+		if (game->rcast.ray_x > 0)
+			return (game->tex_east);
+		return (game->tex_west);
+	}
+	if (game->rcast.ray_y > 0)
+		return (game->tex_south);
+	return (game->tex_north);
+}
+
+static mlx_texture_t	*get_wall_texture(t_game *game, int side)
+{
+	if (side == 0)
+	{
+		if (game->rcast.ray_x > 0)
+			return (game->tex_east);
+		return (game->tex_west);
+	}
+	if (game->rcast.ray_y > 0)
+		return (game->tex_south);
+	return (game->tex_north);
+}
+
 void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_game* game)
 {
 	mlx_texture_t	*texture;
@@ -26,22 +54,10 @@ void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_
 	uint32_t		color;
 	int				y;
 
-	if (block == 'D' && game->tex_door)
-		texture = game->tex_door;
-	else if (side == 0)
-	{
-		if (game->rcast.ray_x > 0)
-			texture = game->tex_east;
-		else
-			texture = game->tex_west;
-	}
+	if (block == 'D')
+		texture = get_door_texture(game, side);
 	else
-	{
-		if (game->rcast.ray_y > 0)
-			texture = game->tex_south;
-		else
-			texture = game->tex_north;
-	}
+		texture = get_wall_texture(game, side);
 	dist_plane = (WIDTH / 2.0) / tan(PI / 6.0);
 	height = (BLOCK / dist) * dist_plane;
 	start_y = (int)((HEIGHT - height) / 2.0);

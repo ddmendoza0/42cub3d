@@ -54,6 +54,26 @@ int	validate_map_characters(t_game *game)
 	return (1);
 }
 
+static int	map_has_doors(t_game *game)
+{
+    int	i;
+    int	j;
+
+    i = 0;
+    while (i < game->map.height)
+    {
+        j = 0;
+        while (game->map.grid[i][j])
+        {
+            if (game->map.grid[i][j] == 'D')
+                return (1);
+            j++;
+        }
+        i++;
+    }
+    return (0);
+}
+
 static char	**copy_map(t_game *game)
 {
 	char	**copy;
