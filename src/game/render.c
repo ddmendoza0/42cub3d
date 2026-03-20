@@ -46,12 +46,12 @@ void	clear_img(t_game *game)
 	uint32_t	ceiling;
 	uint32_t	floor_color;
 
-	ceiling = (game->colors.ceiling_r << 24)
+	ceiling = (game->colors.ceiling_b << 24)
 		| (game->colors.ceiling_g << 16)
-		| (game->colors.ceiling_b << 8) | 0xFF;
-	floor_color = (game->colors.floor_r << 24)
+		| (game->colors.ceiling_r << 8) | 0xFF;
+	floor_color = (game->colors.floor_b << 24)
 		| (game->colors.floor_g << 16)
-		| (game->colors.floor_b << 8) | 0xFF;
+		| (game->colors.floor_r << 8) | 0xFF;
 	fill_half(game, 0, HEIGHT / 2, ceiling);
 	fill_half(game, HEIGHT / 2, HEIGHT, floor_color);
 }
