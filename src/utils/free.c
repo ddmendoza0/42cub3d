@@ -78,13 +78,28 @@ void	free_game(t_game *game)
 	free_textures(&game->textures);
 	free_map(&game->map);
 	if (game->tex_north)
+	{
 		mlx_delete_texture(game->tex_north);
+		game->tex_north = NULL;
+	}
 	if (game->tex_south)
+	{
 		mlx_delete_texture(game->tex_south);
+		game->tex_south = NULL;
+	}
 	if (game->tex_east)
+	{
 		mlx_delete_texture(game->tex_east);
+		game->tex_east = NULL;
+	}
 	if (game->tex_west)
+	{
 		mlx_delete_texture(game->tex_west);
+		game->tex_west = NULL;
+	}
 	if (game->tex_door)
+	{
 		mlx_delete_texture(game->tex_door);
+		game->tex_door = NULL;
+	}
 }

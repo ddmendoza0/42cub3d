@@ -48,7 +48,7 @@ void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_
 	uint32_t		color;
 	int				y;
 
-	if (block == 'D')
+	if (block == 'D' && game->tex_door)
 		texture = game->tex_door;
 	else if (side == 0)
 	{

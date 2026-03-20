@@ -26,8 +26,6 @@ int	validate_identifiers(t_game *game)
 		return (printf("Error\nMissing identifier: F\n"), 0);
 	if (!game->has_ceiling)
 		return (printf("Error\nMissing identifier: C\n"), 0);
-	if (!game->has_door)
-		return (printf("Error\nMissing identifier: DO\n"), 0);
 	return (1);
 }
 

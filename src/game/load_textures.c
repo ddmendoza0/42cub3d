@@ -26,7 +26,11 @@ int	load_textures(t_game *game)
 	game->tex_west = mlx_load_png(game->textures.west);
 	if (!game->tex_west)
 		return (free_game(game), printf("Error\nFailed to load west texture\n"), 0);
-	if (!game->tex_door)
-		return (free_game(game), printf("Error\nFailed to load door texture\n"), 0);
+	if (game->textures.door)
+	{
+		game->tex_door = mlx_load_png(game->textures.door);
+		if (!game->tex_door)
+			return (free_game(game), printf("Error\nFailed to load door texture\n"), 0);
+	}
 	return (1);
 }
