@@ -53,10 +53,7 @@ static int	parse_sections(int fd, t_game *game)
 		return (0);
 	}
 	if (!parse_map(fd, game, line))
-	{
-		free(line);
 		return (0);
-	}
 	return (1);
 }
 
