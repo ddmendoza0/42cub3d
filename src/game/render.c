@@ -21,22 +21,18 @@ void	pixel_put(t_game *game, int x, int y, uint32_t color)
 
 static void	fill_half(t_game *game, int start_y, int end_y, uint32_t color)
 {
-	uint32_t	*pixels;
-	int			x;
-	int			y;
+	int	x;
+	int	y;
 
-	pixels = (uint32_t *)game->img->pixels;
-	x = 0;
-	while (x < WIDTH)
-	{
-		pixels[start_y * WIDTH + x] = color;
-		x++;
-	}
-	y = start_y + 1;
+	y = start_y;
 	while (y < end_y)
 	{
-		ft_memcpy(&pixels[y * WIDTH], &pixels[start_y * WIDTH],
-			WIDTH * sizeof(uint32_t));
+		x = 0;
+		while (x < WIDTH)
+		{
+			mlx_put_pixel(game->img, x, y, color);
+			x++;
+		}
 		y++;
 	}
 }
@@ -46,14 +42,12 @@ void	clear_img(t_game *game)
 	uint32_t	ceiling;
 	uint32_t	floor_color;
 
-	ceiling = (0xFF << 24)
-		| (game->colors.ceiling_b << 16)
-		| (game->colors.ceiling_g << 8)
-		| game->colors.ceiling_r;
-	floor_color = (0xFF << 24)
-		| (game->colors.floor_b << 16)
-		| (game->colors.floor_g << 8)
-		| game->colors.floor_r;
+	ceiling = (game->colors.ceiling_r << 24)
+		| (game->colors.ceiling_g << 16)
+		| (game->colors.ceiling_b << 8) | 0xFF;
+	floor_color = (game->colors.floor_r << 24)
+		| (game->colors.floor_g << 16)
+		| (game->colors.floor_b << 8) | 0xFF;
 	fill_half(game, 0, HEIGHT / 2, ceiling);
 	fill_half(game, HEIGHT / 2, HEIGHT, floor_color);
 }
