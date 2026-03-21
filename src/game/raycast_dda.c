@@ -52,6 +52,20 @@ static void	init_texdata(t_texdata *td, mlx_texture_t *tex, double wall_x, t_pro
 		td->tex_pos += (-proj->start_y) * td->step;
 }
 
+static uint32_t	reorder_color(uint32_t raw)
+{
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+	uint8_t	a;
+
+	r = (raw >> 24) & 0xFF;
+	g = (raw >> 16) & 0xFF;
+	b = (raw >>  8) & 0xFF;
+	a = (raw      ) & 0xFF;
+	return ((a << 24) | (b << 16) | (g << 8) | r);
+}
+
 void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_game *game)
 {
 	mlx_texture_t	*texture;
@@ -77,7 +91,7 @@ void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_
 	{
 		td.tex_y = (int)td.tex_pos & (texture->height - 1);
 		td.tex_pos += td.step;
-		color = ((uint32_t *)texture->pixels)[td.tex_y * texture->width + td.tex_x];
+		color = reorder_color(((uint32_t*)texture->pixels)[td.tex_y * texture->width + td.tex_x]);
 		pixel_put(game, screen_x, y, color);
 		y++;
 	}
