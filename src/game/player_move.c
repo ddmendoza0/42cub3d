@@ -26,15 +26,21 @@ bool	touch(double ray_x, double ray_y, t_game *game)
 
 static void	rotate_mouse(t_game *game, t_player *player)
 {
-	double	sensitivity;
-	int		mouse_x;
-	int		mouse_y;
-	int		center_x;
-	int		delta_x;
+	double		sensitivity;
+	int			mouse_x;
+	int			mouse_y;
+	int			center_x;
+	int			delta_x;
+	static int	warped;
 
 	sensitivity = 0.0005;
 	center_x = WIDTH / 2;
 	mlx_get_mouse_pos(game->mlx, &mouse_x, &mouse_y);
+	if (warped)
+	{
+		warped = 0;
+		return ;
+	}
 	delta_x = mouse_x - center_x;
 	if (delta_x != 0)
 	{
@@ -44,6 +50,7 @@ static void	rotate_mouse(t_game *game, t_player *player)
 		if (player->angle < 0.0)
 			player->angle += 2.0 * PI;
 		mlx_set_mouse_pos(game->mlx, center_x, HEIGHT / 2);
+		warped = 1;
 	}
 }
 
