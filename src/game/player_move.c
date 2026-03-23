@@ -32,7 +32,7 @@ static void	rotate_mouse(t_game *game, t_player *player)
 	int		center_x;
 	int		delta_x;
 
-	sensitivity = 0.002;
+	sensitivity = 0.0005;
 	center_x = WIDTH / 2;
 	mlx_get_mouse_pos(game->mlx, &mouse_x, &mouse_y);
 	delta_x = mouse_x - center_x;
