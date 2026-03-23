@@ -33,7 +33,7 @@ static void	rotate_mouse(t_game *game, t_player *player)
 	static int	last_x;
 	static int	init;
 
-	sensitivity = 0.001;
+	sensitivity = 0.005;
 	mlx_get_mouse_pos(game->mlx, &mouse_x, &mouse_y);
 	if (!init)
 	{
