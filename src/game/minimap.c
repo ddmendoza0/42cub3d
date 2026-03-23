@@ -13,14 +13,13 @@
 #include "cub3d.h"
 
 # define MM_RADIUS 100
-# define MM_SCALE 8
+# define MM_SCALE 6
 
 static uint32_t	get_cell_color(t_game *game, int map_x, int map_y)
 {
 	char	cell;
 
-	if (map_x < 0 || map_y < 0
-		|| map_x >= game->map.width || map_y >= game->map.height)
+	if (map_x < 0 || map_y < 0 || map_x >= game->map.width || map_y >= game->map.height)
 		return (0x00000000);
 	cell = game->map.grid[map_y][map_x];
 	if (cell == '1')
@@ -69,7 +68,7 @@ void	draw_minimap(t_game *game)
 		dx = -MM_RADIUS;
 		while (dx <= MM_RADIUS)
 		{
-			if (dx * dx + dy * dy <= MM_RADIUS * MM_RADIUS)
+			if (dx * dx + dy * dy <= MM_RADIUS * MM_RADIUS && (dx != 0 || dy != 0))
 				draw_mm_pixel(game, dx, dy);
 			dx++;
 		}
