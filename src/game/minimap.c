@@ -93,8 +93,18 @@ static void	draw_mm_player(t_game *game)
 		pixel_put(game, cx + i, cy + i, 0xFF0000FF);
 		i++;
 	}
-	pixel_put(game, cx, cy - 1, 0xFF0000FF);
-	pixel_put(game, cx, cy,     0xFF0000FF);
+	i = 0;
+	while (i <= 6)
+	{
+		pixel_put(game, cx - i, cy + 6, 0xFF0000FF);
+		i++;
+	}
+	i = 0;
+	while (i <= 12)
+	{
+		pixel_put(game, cx, cy - i, 0xFF0000FF);
+		i++;
+	}
 }
 
 void	draw_minimap(t_game *game)
