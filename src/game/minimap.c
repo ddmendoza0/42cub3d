@@ -43,10 +43,10 @@ static void	draw_mm_pixel(t_game *game, int dx, int dy)
 	int			screen_y;
 	uint32_t	color;
 
-	cos_a = cos(game->player.angle - PI / 2);
-	sin_a = sin(game->player.angle - PI / 2);
-	rotated_x = dx * cos_a + dy * sin_a;
-	rotated_y = -dx * sin_a + dy * cos_a;
+	cos_a = cos(-game->player.angle + PI / 2);
+	sin_a = sin(-game->player.angle + PI / 2);
+	rotated_x = dx * cos_a - dy * sin_a;
+	rotated_y = dx * sin_a + dy * cos_a;
 	map_x = (int)(game->player.x / BLOCK + rotated_x / MM_SCALE);
 	map_y = (int)(game->player.y / BLOCK + rotated_y / MM_SCALE);
 	color = get_cell_color(game, map_x, map_y);
