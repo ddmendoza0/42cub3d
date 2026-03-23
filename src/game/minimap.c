@@ -88,12 +88,12 @@ static void	draw_mm_player(t_game *game)
 	cx = MINIMAP_PADDING + MM_RADIUS;
 	cy = MINIMAP_PADDING + MM_RADIUS;
 	i = 0;
-	while (i <= 8)
+	while (i <= 4)
 	{
 		j = -i;
 		while (j <= i)
 		{
-			pixel_put(game, cx + j, cy + i * 2, 0xFF0000FF);
+			pixel_put(game, cx + j, cy + i, 0xFF0000FF);
 			j++;
 		}
 		i++;
