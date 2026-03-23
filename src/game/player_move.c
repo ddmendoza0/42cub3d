@@ -29,19 +29,20 @@ static void	rotate_mouse(t_game *game, t_player *player)
 	double		sensitivity;
 	int			mouse_x;
 	int			mouse_y;
-	int			center_x;
 	int			delta_x;
-	static int	warped;
+	static int	last_x;
+	static int	init;
 
 	sensitivity = 0.0005;
-	center_x = WIDTH / 2;
 	mlx_get_mouse_pos(game->mlx, &mouse_x, &mouse_y);
-	if (warped)
+	if (!init)
 	{
-		warped = 0;
+		last_x = mouse_x;
+		init = 1;
 		return ;
 	}
-	delta_x = mouse_x - center_x;
+	delta_x = mouse_x - last_x;
+	last_x = mouse_x;
 	if (delta_x != 0)
 	{
 		player->angle += delta_x * sensitivity;
@@ -49,8 +50,6 @@ static void	rotate_mouse(t_game *game, t_player *player)
 			player->angle -= 2.0 * PI;
 		if (player->angle < 0.0)
 			player->angle += 2.0 * PI;
-		mlx_set_mouse_pos(game->mlx, center_x, HEIGHT / 2);
-		warped = 1;
 	}
 }
 
