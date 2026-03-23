@@ -88,7 +88,7 @@ static void	draw_mm_player(t_game *game)
 	cx = MINIMAP_PADDING + MM_RADIUS;
 	cy = MINIMAP_PADDING + MM_RADIUS;
 	i = 0;
-	while (i <= 4)
+	while (i <= 6)
 	{
 		j = -i;
 		while (j <= i)
