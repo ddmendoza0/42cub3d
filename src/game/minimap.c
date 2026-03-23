@@ -82,19 +82,19 @@ static void	draw_mm_player(t_game *game)
 {
 	int	cx;
 	int	cy;
+	int	i;
 
 	cx = MINIMAP_PADDING + MM_RADIUS;
 	cy = MINIMAP_PADDING + MM_RADIUS;
-	pixel_put(game, cx, cy - 4, 0xFF0000FF);
-	pixel_put(game, cx - 1, cy - 3, 0xFF0000FF);
-	pixel_put(game, cx, cy - 3, 0xFF0000FF);
-	pixel_put(game, cx + 1, cy - 3, 0xFF0000FF);
-	pixel_put(game, cx - 2, cy - 2, 0xFF0000FF);
-	pixel_put(game, cx, cy - 2, 0xFF0000FF);
-	pixel_put(game, cx + 2, cy - 2, 0xFF0000FF);
+	i = 0;
+	while (i <= 6)
+	{
+		pixel_put(game, cx - i, cy + i, 0xFF0000FF);
+		pixel_put(game, cx + i, cy + i, 0xFF0000FF);
+		i++;
+	}
 	pixel_put(game, cx, cy - 1, 0xFF0000FF);
-	pixel_put(game, cx, cy, 0xFF0000FF);
-	pixel_put(game, cx, cy + 1, 0xFF0000FF);
+	pixel_put(game, cx, cy,     0xFF0000FF);
 }
 
 void	draw_minimap(t_game *game)
