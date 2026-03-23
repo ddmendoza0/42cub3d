@@ -13,7 +13,7 @@
 #include "cub3d.h"
 
 # define MM_RADIUS 100
-# define MM_SCALE 6
+# define MM_SCALE 12
 
 static uint32_t	get_cell_color(t_game *game, int map_x, int map_y)
 {
@@ -74,8 +74,15 @@ void	draw_minimap(t_game *game)
 		}
 		dy++;
 	}
-	pixel_put(game, MINIMAP_PADDING + MM_RADIUS,
-		MINIMAP_PADDING + MM_RADIUS, 0xFF0000FF);
+	pixel_put(game, MINIMAP_PADDING + MM_RADIUS - 1, MINIMAP_PADDING + MM_RADIUS - 1, 0xFF0000FF);
+	pixel_put(game, MINIMAP_PADDING + MM_RADIUS, MINIMAP_PADDING + MM_RADIUS - 1, 0xFF0000FF);
+	pixel_put(game, MINIMAP_PADDING + MM_RADIUS + 1, MINIMAP_PADDING + MM_RADIUS - 1, 0xFF0000FF);
+	pixel_put(game, MINIMAP_PADDING + MM_RADIUS - 1, MINIMAP_PADDING + MM_RADIUS, 0xFF0000FF);
+	pixel_put(game, MINIMAP_PADDING + MM_RADIUS, MINIMAP_PADDING + MM_RADIUS, 0xFF0000FF);
+	pixel_put(game, MINIMAP_PADDING + MM_RADIUS + 1, MINIMAP_PADDING + MM_RADIUS, 0xFF0000FF);
+	pixel_put(game, MINIMAP_PADDING + MM_RADIUS - 1, MINIMAP_PADDING + MM_RADIUS + 1, 0xFF0000FF);
+	pixel_put(game, MINIMAP_PADDING + MM_RADIUS, MINIMAP_PADDING + MM_RADIUS + 1, 0xFF0000FF);
+	pixel_put(game, MINIMAP_PADDING + MM_RADIUS + 1, MINIMAP_PADDING + MM_RADIUS + 1, 0xFF0000FF);
 }
 //#include "cub3d.h"
 //
