@@ -24,6 +24,29 @@ bool	touch(double ray_x, double ray_y, t_game *game)
 	return (game->map.grid[y][x] == '1' || game->map.grid[y][x] == 'D');
 }
 
+static void	rotate_mouse(t_game *game, t_player *player)
+{
+	double	sensitivity;
+	int		mouse_x;
+	int		mouse_y;
+	int		center_x;
+	int		delta_x;
+
+	sensitivity = 0.002;
+	center_x = WIDTH / 2;
+	mlx_get_mouse_pos(game->mlx, &mouse_x, &mouse_y);
+	delta_x = mouse_x - center_x;
+	if (delta_x != 0)
+	{
+		player->angle += delta_x * sensitivity;
+		if (player->angle > 2.0 * PI)
+			player->angle -= 2.0 * PI;
+		if (player->angle < 0.0)
+			player->angle += 2.0 * PI;
+		mlx_set_mouse_pos(game->mlx, center_x, HEIGHT / 2);
+	}
+}
+
 static void	move_forward_backward(double dir_x, double dir_y, t_game *game)
 {
 	double	new_x;
@@ -101,4 +124,5 @@ void	move_player(t_game *game, t_player *player)
 		move_forward_backward(dir_x, dir_y, game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A) || mlx_is_key_down(game->mlx, MLX_KEY_D))
 		strafe_move(dir_x, dir_y, game);
+	rotate_mouse(game, player);
 }

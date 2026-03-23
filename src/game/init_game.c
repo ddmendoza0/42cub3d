@@ -47,5 +47,6 @@ int	init_game(t_game *game)
 		return (0);
 	}
 	mlx_key_hook(game->mlx, key_callback, game);
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	return (1);
 }
