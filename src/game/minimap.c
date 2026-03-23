@@ -43,8 +43,8 @@ static void	draw_mm_pixel(t_game *game, int dx, int dy)
 	double		cos_a;
 	double		sin_a;
 
-	cos_a = cos(-game->player.angle + PI / 2);
-	sin_a = sin(-game->player.angle + PI / 2);
+	cos_a = cos(-game->player.angle - PI / 2);
+	sin_a = sin(-game->player.angle - PI / 2);
 	rotated_x = dx * cos_a - dy * sin_a;
 	rotated_y = dx * sin_a + dy * cos_a;
 	map_x = (int)(game->player.x / BLOCK + rotated_x / MM_SCALE);
