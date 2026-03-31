@@ -1,0 +1,20 @@
+NO ./assets/textures/north.png
+SO ./assets/textures/south.png
+WE ./assets/textures/west.png
+EA ./assets/textures/east.png
+DO ./assets/textures/door.png
+
+F 120,85,50
+C 100,160,220
+
+111111111111111111111
+100000000000000000001
+101111111111111111101
+101               101
+101 DDDDDDDDDDDDD 101
+101 D00000N00000D 101
+101 DDDDDDDDDDDDD 101
+101               101
+101111111111111111101
+100000000000000000001
+111111111111111111111
