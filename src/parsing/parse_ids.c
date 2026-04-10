@@ -80,15 +80,19 @@ static int	parse_floor_ceiling(char *line, t_game *game)
 	{
 		if (game->has_floor)
 			return (printf("Error\nDuplicate identifier: F\n"), 0);
+		if (!parse_color(line, &game->colors, 1))
+			return (0);
 		game->has_floor = 1;
-		return (parse_color(line, &game->colors, 1));
+		return (1);
 	}
 	else if (ft_strncmp(line, "C ", 2) == 0)
 	{
 		if (game->has_ceiling)
 			return (printf("Error\nDuplicate identifier: C\n"), 0);
+		if (!parse_color(line, &game->colors, 0))
+			return (0);
 		game->has_ceiling = 1;
-		return (parse_color(line, &game->colors, 0));
+		return (1);
 	}
 	return (-1);
 }

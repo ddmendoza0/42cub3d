@@ -22,10 +22,11 @@ static int	check_extension(char *filename)
 	return (1);
 }
 
-static char	*parse_identifiers_loop(int fd, t_game *game)
+static char	*parse_identifiers_loop(int fd, t_game *game, int *error)
 {
 	char	*line;
 
+	*error = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -34,6 +35,7 @@ static char	*parse_identifiers_loop(int fd, t_game *game)
 		if (!parse_identifier(line, game))
 		{
 			free(line);
+			*error = 1;
 			return (NULL);
 		}
 		free(line);
@@ -45,8 +47,11 @@ static char	*parse_identifiers_loop(int fd, t_game *game)
 static int	parse_sections(int fd, t_game *game)
 {
 	char	*line;
+	int		error;
 
-	line = parse_identifiers_loop(fd, game);
+	line = parse_identifiers_loop(fd, game, &error);
+	if (error)
+		return (0);
 	if (!validate_identifiers(game))
 	{
 		free(line);

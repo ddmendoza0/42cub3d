@@ -128,8 +128,7 @@ static int	process_cell(char **map, t_point cur, t_game *game,
 {
 	if (!is_valid_position(map, cur.x, cur.y, game))
 		return (0);
-	if (map[cur.y][cur.x] == '1' || map[cur.y][cur.x] == 'X'
-		|| map[cur.y][cur.x] == 'D')
+	if (map[cur.y][cur.x] == '1' || map[cur.y][cur.x] == 'X')
 		return (1);
 	if (map[cur.y][cur.x] == ' ')
 		return (0);

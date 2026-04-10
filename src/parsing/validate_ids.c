@@ -47,6 +47,24 @@ int	validate_texture_file(char *path)
 	return (1);
 }
 
+static int	is_valid_rgb_str(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] == ' ' || s[i] == '\t')
+		i++;
+	if (!s[i])
+		return (0);
+	while (s[i] >= '0' && s[i] <= '9')
+		i++;
+	while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
+		i++;
+	if (s[i] != '\0')
+		return (0);
+	return (1);
+}
+
 int	validate_rgb_count(char **rgb)
 {
 	int	count;
@@ -64,6 +82,8 @@ int	validate_rgb_count(char **rgb)
 
 int	validate_rgb_range(char **rgb, int *r, int *g, int *b)
 {
+	if (!is_valid_rgb_str(rgb[0]) || !is_valid_rgb_str(rgb[1]) || !is_valid_rgb_str(rgb[2]))
+		return (free_rgb_array(rgb), printf("Error\nRGB values must be in range [0-255]\n"), 0);
 	*r = ft_atoi(rgb[0]);
 	*g = ft_atoi(rgb[1]);
 	*b = ft_atoi(rgb[2]);
