@@ -50,6 +50,7 @@ int	validate_texture_file(char *path)
 static int	is_valid_rgb_str(char *s)
 {
 	int	i;
+	int	digits;
 
 	i = 0;
 	while (s[i] == ' ' || s[i] == '\t')
@@ -57,7 +58,12 @@ static int	is_valid_rgb_str(char *s)
 	if (!s[i])
 		return (0);
 	while (s[i] >= '0' && s[i] <= '9')
+	{
+		digits++;
 		i++;
+	}
+	if (digits == 0 || digits > 3)
+		return (0);
 	while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
 		i++;
 	if (s[i] != '\0')
