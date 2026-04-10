@@ -44,8 +44,8 @@ int	parse_color(char *line, t_colors *colors, int is_floor)
 
 	line = skip_to_value(line);
 	rgb = ft_split(line, ',');
-	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
-		return (0);
+	if (!rgb)
+		return (printf("Error\nRGB must have exactly 3 values\n"), 0);
 	if (!validate_rgb_count(rgb))
 		return (0);
 	if (!validate_rgb_range(rgb, &argb[0], &argb[1], &argb[2]))
