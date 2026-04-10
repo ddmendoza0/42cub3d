@@ -6,7 +6,7 @@
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:26:35 by diespino          #+#    #+#             */
-/*   Updated: 2026/03/13 10:53:40 by dmendoza         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:56:35 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,16 @@ static mlx_texture_t	*get_wall_texture(t_game *game, int side)
 	return (game->tex_north);
 }
 
-static void	init_texdata(t_texdata *td, mlx_texture_t *tex, double wall_x, t_proj *proj, t_game *game)
+static void	init_texdata(t_texdata *td, mlx_texture_t *tex,
+			double wall_x, t_proj *proj, t_game *game)
 {
 	td->tex_x = (int)(wall_x * (double)tex->width);
 	if ((proj->side == 0 && game->rcast.ray_x < 0)
 		|| (proj->side == 1 && game->rcast.ray_y < 0))
 		td->tex_x = tex->width - td->tex_x - 1;
 	td->step = (double)tex->height / proj->height;
-	td->tex_pos = (proj->start_y - HEIGHT / 2.0 + proj->height / 2.0) * td->step;
+	td->tex_pos = (proj->start_y - HEIGHT
+			/ 2.0 + proj->height / 2.0) * td->step;
 	if (proj->start_y < 0)
 		td->tex_pos += (-proj->start_y) * td->step;
 }
@@ -61,12 +63,13 @@ static uint32_t	reorder_color(uint32_t raw)
 
 	r = (raw >> 24) & 0xFF;
 	g = (raw >> 16) & 0xFF;
-	b = (raw >>  8) & 0xFF;
-	a = (raw      ) & 0xFF;
+	b = (raw >> 8) & 0xFF;
+	a = (raw) & 0xFF;
 	return ((a << 24) | (b << 16) | (g << 8) | r);
 }
 
-void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_game *game)
+void	draw_col(double dist, int screen_x, int side,
+		double wall_x, char block, t_game *game)
 {
 	mlx_texture_t	*texture;
 	t_texdata		td;
@@ -91,7 +94,8 @@ void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_
 	{
 		td.tex_y = (int)td.tex_pos & (texture->height - 1);
 		td.tex_pos += td.step;
-		color = reorder_color(((uint32_t*)texture->pixels)[td.tex_y * texture->width + td.tex_x]);
+		color = reorder_color(((uint32_t *)texture->pixels)[td.tex_y
+				* texture->width + td.tex_x]);
 		pixel_put(game, screen_x, y, color);
 		y++;
 	}
@@ -100,14 +104,14 @@ void	draw_col(double dist, int screen_x, int side, double wall_x, char block, t_
 double	grid_dist(t_game *game, int side, double ray_angle)
 {
 	double	dist;
-	
+
 	if (side == 0)
 		dist = ((game->rcast.map_x - game->player.x / BLOCK
-			+ (1 - game->rcast.step_x) / 2.0)
+					+ (1 - game->rcast.step_x) / 2.0)
 				* BLOCK / game->rcast.ray_x);
 	else
 		dist = ((game->rcast.map_y - game->player.y / BLOCK
-			+ (1 - game->rcast.step_y) / 2.0)
+					+ (1 - game->rcast.step_y) / 2.0)
 				* BLOCK / game->rcast.ray_y);
 	dist *= cos(ray_angle - game->player.angle);
 	return (dist);
@@ -145,22 +149,26 @@ static void	grid_pos_init(t_game *game)
 	if (game->rcast.ray_x < 0)
 	{
 		game->rcast.step_x = -1;
-		game->rcast.side_dist_x = (game->player.x - game->rcast.map_x * BLOCK) / fabs(game->rcast.ray_x);
+		game->rcast.side_dist_x = (game->player.x - game->rcast.map_x
+				* BLOCK) / fabs(game->rcast.ray_x);
 	}
 	else
 	{
 		game->rcast.step_x = 1;
-		game->rcast.side_dist_x = ((game->rcast.map_x + 1) * BLOCK - game->player.x) / fabs(game->rcast.ray_x);
+		game->rcast.side_dist_x = ((game->rcast.map_x + 1)
+				* BLOCK - game->player.x) / fabs(game->rcast.ray_x);
 	}
 	if (game->rcast.ray_y < 0)
 	{
 		game->rcast.step_y = -1;
-		game->rcast.side_dist_y = (game->player.y - game->rcast.map_y * BLOCK) / fabs(game->rcast.ray_y);
+		game->rcast.side_dist_y = (game->player.y - game->rcast.map_y
+				* BLOCK) / fabs(game->rcast.ray_y);
 	}
 	else
 	{
 		game->rcast.step_y = 1;
-		game->rcast.side_dist_y = ((game->rcast.map_y + 1) * BLOCK - game->player.y) / fabs(game->rcast.ray_y);
+		game->rcast.side_dist_y = ((game->rcast.map_y + 1)
+				* BLOCK - game->player.y) / fabs(game->rcast.ray_y);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: dmendoza <dmendoza@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 10:16:31 by dmendoza          #+#    #+#             */
-/*   Updated: 2026/03/13 10:21:48 by dmendoza         ###   ########.fr       */
+/*   Updated: 2026/04/10 13:53:58 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,11 @@ int	validate_rgb_count(char **rgb)
 
 int	validate_rgb_range(char **rgb, int *r, int *g, int *b)
 {
-	if (!is_valid_rgb_str(rgb[0]) || !is_valid_rgb_str(rgb[1]) || !is_valid_rgb_str(rgb[2]))
-		return (free_rgb_array(rgb), printf("Error\nRGB values must be in range [0-255]\n"), 0);
+	if (!is_valid_rgb_str(rgb[0]) || !is_valid_rgb_str(rgb[1])
+		|| !is_valid_rgb_str(rgb[2]))
+		return (free_rgb_array(rgb),
+			printf("Error\nRGB values must be in range [0-255]\n"),
+			0);
 	*r = ft_atoi(rgb[0]);
 	*g = ft_atoi(rgb[1]);
 	*b = ft_atoi(rgb[2]);

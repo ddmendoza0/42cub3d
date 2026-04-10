@@ -6,7 +6,7 @@
 /*   By: dmendoza <dmendoza@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 08:34:57 by dmendoza          #+#    #+#             */
-/*   Updated: 2026/03/13 08:35:25 by dmendoza         ###   ########.fr       */
+/*   Updated: 2026/04/10 14:18:54 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	main(int argc, char **argv)
 	}
 	mlx_loop_hook(game.mlx, draw_loop, &game);
 	mlx_loop(game.mlx);
-	mlx_terminate(game.mlx);
+//	mlx_terminate(game.mlx);
 	free_game(&game);
+	mlx_terminate(game.mlx);
 	return (0);
 }

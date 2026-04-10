@@ -6,7 +6,7 @@
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:58:57 by diespino          #+#    #+#             */
-/*   Updated: 2026/03/13 10:51:06 by dmendoza         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:27:26 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,12 @@ bool	touch(double ray_x, double ray_y, t_game *game)
 
 static void	rotate_mouse(t_game *game, t_player *player)
 {
-	double		sensitivity;
 	int			mouse_x;
 	int			mouse_y;
 	int			delta_x;
 	static int	last_x;
 	static int	init;
 
-	sensitivity = 0.005;
 	mlx_get_mouse_pos(game->mlx, &mouse_x, &mouse_y);
 	if (!init)
 	{
@@ -45,7 +43,7 @@ static void	rotate_mouse(t_game *game, t_player *player)
 	last_x = mouse_x;
 	if (delta_x != 0)
 	{
-		player->angle += delta_x * sensitivity;
+		player->angle += delta_x * MOUSE_SENS;
 		if (player->angle > 2.0 * PI)
 			player->angle -= 2.0 * PI;
 		if (player->angle < 0.0)
@@ -126,9 +124,11 @@ void	move_player(t_game *game, t_player *player)
 		player->angle = 2.0 * PI;
 	dir_x = cos(player->angle) * speed;
 	dir_y = sin(player->angle) * speed;
-	if (mlx_is_key_down(game->mlx, MLX_KEY_W) || mlx_is_key_down(game->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W)
+		|| mlx_is_key_down(game->mlx, MLX_KEY_S))
 		move_forward_backward(dir_x, dir_y, game);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_A) || mlx_is_key_down(game->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A)
+		|| mlx_is_key_down(game->mlx, MLX_KEY_D))
 		strafe_move(dir_x, dir_y, game);
 	rotate_mouse(game, player);
 }

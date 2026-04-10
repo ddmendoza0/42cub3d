@@ -25,8 +25,8 @@ ORDEN ARCHIVO .cub
 
 --------------------------------------------------------------------------------
 
-COLOR
-## assets/maps/error_test/color/error_color_dup.cub
+COLOR --> TODO OK
+/*## assets/maps/error_test/color/error_color_dup.cub
    F 120,85,50
    C 100,160,220
    C 100,260,200
@@ -65,12 +65,12 @@ COLOR
    F 120,85,50
    C 
 
-@ Se ejecuta igualmente sin mensaje de error
+@ Se ejecuta igualmente sin mensaje de error*/
 
 --------------------------------------------------------------------------------
 
-TEXTURAS
-## assets/maps/error_test/textura/text_dup.cub
+TEXTURAS --> TODO OK
+/*## assets/maps/error_test/textura/text_dup.cub
    NO ./assets/textures/north.png
    SO ./assets/textures/south.png
    SO ./assets/textures/south.png
@@ -127,12 +127,12 @@ TEXTURAS
 > Texture file must have .png extension: ./assets/textures/east
 > Error
 > Missing identifier: F
-@ El segundo mensaje de error no deberia aparecer
+@ El segundo mensaje de error no deberia aparecer*/
 
 --------------------------------------------------------------------------------
 
 MAPA
-## assets/maps/error_test/mapa/error_isla_puerta.cub
+/*## assets/maps/error_test/mapa/error_isla_puerta.cub
    111111111111111111111
    100000000000000000001
    101111111111111111101
@@ -144,7 +144,7 @@ MAPA
    101111111111111111101
    100000000000000000001
    111111111111111111111
-@ Lo ejecuta normal a pesar de que es una isla de puertas
+@ Lo ejecuta normal a pesar de que es una isla de puertas*/
 
 
 ## assets/maps/error_test/mapa/error_mapa_isla_extern_open.cub
@@ -160,7 +160,7 @@ MAPA
 @ Se ejecuta a pesar de estar abierto
 
 
-## assets/maps/error_test/mapa/error_mapa_isla_puerta_mal.cub 
+/*## assets/maps/error_test/mapa/error_mapa_isla_puerta_mal.cub 
    111111111111111111111
    100000000000000000001
    101111111111111111101
@@ -172,7 +172,7 @@ MAPA
    101111111111111111101
    100000000000000000001
    111111111111111111111
-@ Se ejecuta a pesar de tener una puerta mirando al vacio
+@ Se ejecuta a pesar de tener una puerta mirando al vacio*/
 
 
 ## assets/maps/error_test/mapa/error_mapa_puerta_fuera.cub
