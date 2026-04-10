@@ -57,6 +57,7 @@ static int	is_valid_rgb_str(char *s)
 		i++;
 	if (!s[i])
 		return (0);
+	digits = 0;
 	while (s[i] >= '0' && s[i] <= '9')
 	{
 		digits++;
