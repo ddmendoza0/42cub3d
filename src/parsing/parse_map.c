@@ -19,9 +19,8 @@ static int	is_map_line(char *line)
 	i = 0;
 	while (line[i] && line[i] == ' ')
 		i++;
-	if (line[i] == '1' || line[i] == '0')
-		return (1);
-	return (0);
+	return (line[i] == '1' || line[i] == '0' || line[i] == 'D'
+		|| is_player(line[i]));
 }
 
 static int	add_first_line(t_list **map_lines, char *first_line, int *height)
