@@ -1,11 +1,10 @@
 ORDEN ARCHIVO .cub - OK
-/*## assets / maps / error_test / archivo_cub / error_test_order_1.cub
+/*## assets/maps/error_test/archivo_cub/error_test_order_1.cub
    1. F/C
     2. TEXTURAS
      3. MAPA
 
 @ OUTPUT OK - RUN
-
 
 ## assets/maps/error_test/archivo_cub/error_test_order_2.cub
    1. F/C
