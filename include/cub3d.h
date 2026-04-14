@@ -66,12 +66,6 @@ typedef struct s_map
 	int		height;
 }	t_map;
 
-typedef struct s_point
-{
-	int	x;
-	int	y;
-}	t_point;
-
 typedef struct s_texdata
 {
 	int		tex_x;
