@@ -22,6 +22,17 @@ static int	check_extension(char *filename)
 	return (1);
 }
 
+static int	is_map_start(char *line)
+{
+	if (line[0] == '0' || line[0] == '1' || line[0] == ' '
+		|| line[0] == 'D')
+		return (1);
+	if (is_player(line[0]) && line[1] != 'O' && line[1] != 'E'
+		&& line[1] != 'A' && line[1] != 'W')
+		return (1);
+	return (0);
+}
+
 static char	*parse_identifiers_loop(int fd, t_game *game, int *error)
 {
 	char	*line;
@@ -30,8 +41,7 @@ static char	*parse_identifiers_loop(int fd, t_game *game, int *error)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (line[0] == '0' || line[0] == '1' || line[0] == ' '
-			|| line[0] == 'D' || is_player(line[0]))
+		if (is_map_start(line))
 			return (line);
 		if (!parse_identifier(line, game))
 		{
