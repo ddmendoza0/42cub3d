@@ -42,7 +42,7 @@ static char	*dup_strip(char *content)
 	return (line);
 }
 
-static char	**convert_list_to_array(t_list *map_lines, int height)
+char	**convert_list_to_array(t_list *map_lines, int height)
 {
 	char	**grid;
 	t_list	*current;
