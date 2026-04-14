@@ -70,6 +70,20 @@ char	**convert_list_to_array(t_list *map_lines, int height)
 	return (grid);
 }
 
+static void	swap_grid(t_game *game, char **new_grid)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->map.height)
+	{
+		free(game->map.grid[i]);
+		i++;
+	}
+	free(game->map.grid);
+	game->map.grid = new_grid;
+}
+
 int	normalize_map(t_game *game)
 {
 	char	**new_grid;
@@ -89,11 +103,9 @@ int	normalize_map(t_game *game)
 			free(new_grid);
 			return (0);
 		}
-		free(game->map.grid[i]);
 		i++;
 	}
 	new_grid[i] = NULL;
-	free(game->map.grid);
-	game->map.grid = new_grid;
+	swap_grid(game, new_grid);
 	return (1);
 }
