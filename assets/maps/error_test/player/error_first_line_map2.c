@@ -2,12 +2,12 @@ NO ./assets/textures/north.png
 SO ./assets/textures/south.png
 WE ./assets/textures/west.png
 EA ./assets/textures/east.png
+DO ./assets/textures/door.png
 
 F 220,100,0
 C 225,30,0
 
-1111111
-1000001
-1000001
-1000001
-1111111
+D11111
+100001
+10N001
+111111
