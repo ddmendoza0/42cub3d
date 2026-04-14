@@ -30,7 +30,8 @@ static char	*parse_identifiers_loop(int fd, t_game *game, int *error)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (is_valid_char(line[0]))
+		if (line[0] == '0' || line[0] == '1' || line[0] == ' '
+			|| line[0] == 'D' || is_player(line[0]))
 			return (line);
 		if (!parse_identifier(line, game))
 		{

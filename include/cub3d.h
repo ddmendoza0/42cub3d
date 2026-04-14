@@ -152,7 +152,6 @@ int		parse_color(char *line, t_colors *colors, int is_floor);
 int		normalize_map(t_game *game);
 int		validate_identifiers(t_game *game);
 int		parse_map(int fd, t_game *game, char *first_line);
-int		is_valid_char(char c);
 int		is_player(char c);
 int		validate_texture_file(char *path);
 int		validate_map_characters(t_game *game);
