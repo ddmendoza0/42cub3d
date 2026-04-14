@@ -139,6 +139,7 @@ int		parse_map(int fd, t_game *game, char *first_line);
 int		is_player(char c);
 int		validate_texture_file(char *path);
 int		validate_map_characters(t_game *game);
+char	**convert_list_to_array(t_list *map_lines, int height);
 int		validate_map_data(t_game* game);
 int		validate_map_closed(t_game *game);
 int		validate_rgb_count(char **rgb);
