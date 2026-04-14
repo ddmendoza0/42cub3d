@@ -24,8 +24,9 @@ static int	check_extension(char *filename)
 
 static int	is_map_start(char *line)
 {
-	if (line[0] == '0' || line[0] == '1' || line[0] == ' '
-		|| line[0] == 'D')
+	if (line[0] == '0' || line[0] == '1' || line[0] == ' ' )
+		return (1);
+	if (line[0] == 'D' && line[1] != 'O')
 		return (1);
 	if (is_player(line[0]) && line[1] != 'O' && line[1] != 'E'
 		&& line[1] != 'A' && line[1] != 'W')
