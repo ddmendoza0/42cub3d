@@ -104,6 +104,14 @@ typedef struct s_rcast
 	int		step_y;
 }	t_rcast;
 
+typedef struct s_mmpos
+{
+	int	map_x;
+	int	map_y;
+	int	screen_x;
+	int	screen_y;
+}	t_mmpos;
+
 typedef struct s_game
 {
 	t_textures		textures;

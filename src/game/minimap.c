@@ -31,26 +31,19 @@ static uint32_t	get_cell_color(t_game *game, int map_x, int map_y)
 
 static void	draw_mm_pixel(t_game *game, int dx, int dy)
 {
+	t_mmpos		pos;
 	double		cos_a;
 	double		sin_a;
-	double		rotated_x;
-	double		rotated_y;
-	int			map_x;
-	int			map_y;
-	int			screen_x;
-	int			screen_y;
 	uint32_t	color;
 
 	cos_a = cos(-game->player.angle + PI / 2);
 	sin_a = sin(-game->player.angle + PI / 2);
-	rotated_x = (-dx) * cos_a - dy * sin_a;
-	rotated_y = -((-dx) * sin_a + dy * cos_a);
-	map_x = (int)(game->player.x / BLOCK + rotated_x / MM_SCALE);
-	map_y = (int)(game->player.y / BLOCK + rotated_y / MM_SCALE);
-	color = get_cell_color(game, map_x, map_y);
-	screen_x = MINIMAP_PADDING + MM_RADIUS + dx;
-	screen_y = MINIMAP_PADDING + MM_RADIUS + dy;
-	pixel_put(game, screen_x, screen_y, color);
+	pos.map_x = (int)(game->player.x / BLOCK + ((-dx) * cos_a - dy * sin_a) / MM_SCALE);
+	pos.map_y = (int)(game->player.y / BLOCK - ((-dx) * sin_a + dy * cos_a) / MM_SCALE);
+	pos.screen_x = MINIMAP_PADDING + MM_RADIUS + dx;
+	pos.screen_y = MINIMAP_PADDING + MM_RADIUS + dy;
+	color = get_cell_color(game, pos.map_x, pos.map_y);
+	pixel_put(game, pos.screen_x, pos.screen_y, color);
 }
 
 static void	draw_mm_border(t_game *game)
