@@ -71,12 +71,8 @@ static void	free_map(t_map *map)
 	map->grid = NULL;
 }
 
-void	free_game(t_game *game)
+static void	free_mlx_textures(t_game *game)
 {
-	if (!game)
-		return ;
-	free_textures(&game->textures);
-	free_map(&game->map);
 	if (game->tex_north)
 	{
 		mlx_delete_texture(game->tex_north);
@@ -102,4 +98,13 @@ void	free_game(t_game *game)
 		mlx_delete_texture(game->tex_door);
 		game->tex_door = NULL;
 	}
+}
+
+void	free_game(t_game *game)
+{
+	if (!game)
+		return ;
+	free_textures(&game->textures);
+	free_map(&game->map);
+	free_mlx_textures(game);
 }
