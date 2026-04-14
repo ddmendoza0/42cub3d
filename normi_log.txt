@@ -90,27 +90,10 @@
 	Error: LINE_TOO_LONG        (line: 211, col:  82):	line too long
 	Error: TOO_MANY_LINES       (line: 213, col:   1):	Function has more than 25 lines
 
-	> validate_map.c: Error!
-	Error: LINE_TOO_LONG        (line:  17, col:  82):	line too long
-	Error: SPC_AFTER_OPERATOR   (line:  17, col:  99):	missing space after operator
-	Error: CONSECUTIVE_NEWLINES (line:  20, col:   1):	Consecutive newlines
-	Error: LINE_TOO_LONG        (line:  40, col:  83):	line too long
-	Error: TOO_MANY_LINES       (line:  55, col:   1):	Function has more than 25 lines
-	Error: TOO_MANY_FUNCS       (line:  95, col:   1):	Too many functions in file
-	Error: TOO_MANY_FUNCS       (line: 106, col:   1):	Too many functions in file
-	Error: CONSECUTIVE_SPC      (line: 111, col:  20):	Two or more consecutives spaces	
-	Error: TOO_FEW_TAB          (line: 111, col:  22):	Missing tabs for indent level
-	Error: TOO_MANY_INSTR       (line: 111, col:  22):	Too many instructions on a single line
-	Error: TOO_FEW_TAB          (line: 112, col:  22):	Missing tabs for indent level
-	Error: TOO_MANY_INSTR       (line: 112, col:  22):	Too many instructions on a single line
-	Error: CONSECUTIVE_SPC      (line: 113, col:  20):	Two or more consecutives spaces
-	Error: TOO_FEW_TAB          (line: 113, col:  22):	Missing tabs for indent level
-	Error: TOO_MANY_INSTR       (line: 113, col:  22):	Too many instructions on a single line
-	Error: CONSECUTIVE_SPC      (line: 114, col:  20):	Two or more consecutives spaces
-	Error: TOO_FEW_TAB          (line: 114, col:  22):	Missing tabs for indent level
-	Error: TOO_MANY_INSTR       (line: 114, col:  22):	Too many instructions on a single line
-	Error: TOO_MANY_FUNCS       (line: 126, col:   1):	Too many functions in file
-	Error: TOO_MANY_ARGS        (line: 127, col:  42):	Function has more than 4 arguments
-	Error: TOO_MANY_FUNCS       (line: 142, col:   1):	Too many functions in file
-	Error: TOO_MANY_FUNCS       (line: 169, col:   1):	Too many functions in file
-	Error: LINE_TOO_LONG        (line: 177, col:  82):	line too long
+	validate_map_bounds.c: Error!
+	Error: EMPTY_LINE_FILE_START (line:   1, col:   1):     Empty line at start of file
+	Error: INVALID_HEADER       (line:   1, col:   1):      Missing or invalid 42 header
+
+	validate_map_chars.c: Error!
+	Error: LINE_TOO_LONG        (line:  17, col:  82):      line too long
+	Error: LINE_TOO_LONG        (line:  46, col:  82):      line too long

@@ -29,7 +29,8 @@ PARSING_FILES	=	$(PARSING_DIR)parse_file.c\
 					$(PARSING_DIR)parse_ids.c\
 					$(PARSING_DIR)validate_ids.c\
 					$(PARSING_DIR)parse_map.c\
-					$(PARSING_DIR)validate_map.c\
+					$(PARSING_DIR)validate_map_bounds.c\
+					$(PARSING_DIR)validate_map_chars.c\
 					$(PARSING_DIR)parse_colors.c
 
 UTILS_DIR		=	$(SRC_DIR)utils/
