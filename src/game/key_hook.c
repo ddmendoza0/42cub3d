@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	open_door(t_game *game, t_player *player)
+static void	open_door(t_game *game, t_player *player)
 {
 	int		grid_x;
 	int		grid_y;

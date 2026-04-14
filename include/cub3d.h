@@ -22,8 +22,6 @@
 # define MOUSE_SENS 0.005
 
 //minimap
-# define MINIMAP_SIZE 350
-# define MINIMAP_SCALE 10
 # define MINIMAP_PADDING 20
 # define MM_RADIUS 100
 # define MM_SCALE 12

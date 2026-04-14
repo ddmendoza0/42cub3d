@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-double	grid_dist(t_game *game, int side, double ray_angle)
+static double	grid_dist(t_game *game, int side, double ray_angle)
 {
 	double	dist;
 
