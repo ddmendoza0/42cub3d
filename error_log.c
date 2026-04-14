@@ -23,6 +23,13 @@ ORDEN ARCHIVO .cub - OK
 > Error
 > Missing identifier: NO
 @ OUTPUT OK - NO RUN
+
+
+## assets/maps/error_test/archivo_cub/valid_compressed_ids.cub
+    Todos los ids sin separaciones de salto de linia.
+
+@ OUTPUT OK - RUN
+
 */
 
 --------------------------------------------------------------------------------
@@ -199,4 +206,27 @@ MAPA -- OK
 > Error
 > Map is not closed by walls
 @ OUTPUT OK - NO RUN
+
+
+## assets/maps/error_test/mapa/error_first_line_map1.cub
+    N11111
+    100001
+    100001
+    111111
+
+> Error
+> Map is not closed by walls
+@ OUTPUT OK - NO RUN
+
+
+## assets/maps/error_test/mapa/error_first_line_map2.cub
+    D11111
+    100001
+    10N001
+    111111
+
+> Error
+> Map is not closed by walls
+@ OUTPUT OK - NO RUN
+
 */
