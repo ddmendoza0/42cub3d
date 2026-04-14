@@ -1,15 +1,19 @@
 
 > norminette include
 
-	> cub3d.h: Error! --> draw_col()
-	Error: TOO_MANY_ARGS        (line: 155, col:  95):	Function has more than 4 arguments
+	> cub3d.h: OK!
 
 ======================================================================================================
 
-> norminette src/utils  
-	
-	> free.c: Error!
-	Error: TOO_MANY_LINES       (line: 105, col:   1):	Function has more than 25 lines
+> norminette src/
+
+	> main.c: OK!
+
+======================================================================================================
+
+> norminette src/utils 
+
+	> free.c: OK!
 
 ======================================================================================================
 
@@ -19,26 +23,23 @@
 
 	> key_hook.c: OK!
 
-	> render.c: OK!
-
 	> load_textures.c: OK!
+	
+	> render.c: OK!
+	
+	> player_move.c: OK!
 
-	> player_move.c: OK!(MACRO MOUSE_SENS)
+	> raycast_dda.c: OK!
 
-	> raycast_dda.c: Error!
-	Error: TOO_MANY_ARGS        (line:  44, col:  55):	Function has more than 4 arguments
-	Error: TOO_MANY_ARGS        (line:  72, col:  49):	Function has more than 4 arguments
-	Error: TOO_MANY_LINES       (line: 102, col:   1):	Function has more than 25 lines
-	Error: TOO_MANY_FUNCS       (line: 104, col:   1):	Too many functions in file
-	Error: TOO_MANY_FUNCS       (line: 120, col:   1):	Too many functions in file
-	Error: TOO_MANY_FUNCS       (line: 147, col:   1):	Too many functions in file
-	Error: TOO_MANY_FUNCS       (line: 175, col:   1):	Too many functions in file
+	> minimap.c: Error!
+	Error: LINE_TOO_LONG        (line:  41, col:  87):      line too long
+	Error: LINE_TOO_LONG        (line:  42, col:  87):      line too long
 
-	> minimap.c: Error! (MACROS movidas a .h && todo en funcion draw_mm_pixel())
-	Error: TOO_MANY_VARS_FUNC   (line:  39, col:   1): Too many var declarations in a function
-	Error: TOO_MANY_VARS_FUNC   (line:  40, col:   1): Too many var declarations in a function
-	Error: TOO_MANY_VARS_FUNC   (line:  41, col:   1): Too many var declarations in a function
-	Error: TOO_MANY_VARS_FUNC   (line:  42, col:   1): Too many var declarations in a function
+	> raycast_draw.c: Error!
+	Error: EMPTY_LINE_FILE_START (line:   1, col:   1):     Empty line at start of file
+	Error: INVALID_HEADER       (line:   1, col:   1):      Missing or invalid 42 header
+	Error: LINE_TOO_LONG        (line:  19, col:  82):      line too long
+	Error: LINE_TOO_LONG        (line:  46, col:  84):      line too long
 
 ======================================================================================================
 
@@ -47,53 +48,29 @@
 	> parse_colors.c: OK!
 
 	> parse_file.c: OK!
-	
+
 	> parse_ids.c: OK!
-	
-	> validate_ids.c: OK!
 
 	> parse_map.c: Error!
-	Error: CONSECUTIVE_NEWLINES (line:  15, col:   1):	Consecutive newlines
-	Error: TOO_FEW_TAB          (line:  18, col:   1):	Missing tabs for indent level
-	Error: SPACE_REPLACE_TAB    (line:  18, col:   5):	Found space when expecting tab
-	Error: TOO_FEW_TAB          (line:  19, col:   1):	Missing tabs for indent level
-	Error: SPACE_REPLACE_TAB    (line:  19, col:   5):	Found space when expecting tab
-	Error: TOO_FEW_TAB          (line:  21, col:   1):	Missing tabs for indent level
-	Error: SPACE_REPLACE_TAB    (line:  21, col:   5):	Found space when expecting tab
-	Error: TOO_FEW_TAB          (line:  22, col:   1):	Missing tabs for indent level
-	Error: SPACE_REPLACE_TAB    (line:  22, col:   5):	Found space when expecting tab
-	Error: TOO_FEW_TAB          (line:  23, col:   1):	Missing tabs for indent level
-	Error: SPACE_EMPTY_LINE     (line:  23, col:   5):	Space on empty line
-	Error: TOO_FEW_TAB          (line:  24, col:   1):	Missing tabs for indent level
-	Error: SPACE_REPLACE_TAB    (line:  24, col:   9):	Found space when expecting tab
-	Error: TOO_FEW_TAB          (line:  25, col:   1):	Missing tabs for indent level
-	Error: SPACE_REPLACE_TAB    (line:  25, col:   9):	Found space when expecting tab
-	Error: TOO_FEW_TAB          (line:  26, col:   1):	Missing tabs for indent level
-	Error: SPACE_EMPTY_LINE     (line:  26, col:   9):	Space on empty line
-	Error: TOO_FEW_TAB          (line:  27, col:   1):	Missing tabs for indent level
-	Error: SPACE_REPLACE_TAB    (line:  27, col:  13):	Found space when expecting tab
-	Error: TOO_FEW_TAB          (line:  28, col:   1):	Missing tabs for indent level
-	Error: SPACE_REPLACE_TAB    (line:  28, col:  17):	Found space when expecting tab
-	Error: TOO_FEW_TAB          (line:  29, col:   1):	Missing tabs for indent level
-	Error: SPACE_REPLACE_TAB    (line:  29, col:  13):	Found space when expecting tab
-	Error: TOO_FEW_TAB          (line:  30, col:   1):	Missing tabs for indent level
-	Error: SPACE_EMPTY_LINE     (line:  30, col:   9):	Space on empty line
-	Error: TOO_FEW_TAB          (line:  31, col:   1):	Missing tabs for indent level
-	Error: SPACE_REPLACE_TAB    (line:  31, col:   9):	Found space when expecting tab
-	Error: TOO_FEW_TAB          (line:  32, col:   1):	Missing tabs for indent level
-	Error: SPACE_EMPTY_LINE     (line:  32, col:   5):	Space on empty line
-	Error: TOO_FEW_TAB          (line:  33, col:   1):	Missing tabs for indent level
-	Error: SPACE_REPLACE_TAB    (line:  33, col:   5):	Found space when expecting tab
-	Error: TOO_MANY_FUNCS       (line: 122, col:   1):	Too many functions in file
-	Error: TOO_MANY_LINES       (line: 150, col:   1):	Function has more than 25 lines
-	Error: TOO_MANY_FUNCS       (line: 152, col:   1):	Too many functions in file
-	Error: LINE_TOO_LONG        (line: 211, col:  82):	line too long
-	Error: TOO_MANY_LINES       (line: 213, col:   1):	Function has more than 25 lines
+	Error: LINE_TOO_LONG        (line:  61, col:  84):      line too long
 
-	validate_map_bounds.c: Error!
+	> parse_map_utils.c: Error!
 	Error: EMPTY_LINE_FILE_START (line:   1, col:   1):     Empty line at start of file
 	Error: INVALID_HEADER       (line:   1, col:   1):      Missing or invalid 42 header
 
-	validate_map_chars.c: Error!
+	> validate_ids.c: OK!
+
+	> validate_map_bounds.c: Error!
+	Error: EMPTY_LINE_FILE_START (line:   1, col:   1):     Empty line at start of file
+	Error: INVALID_HEADER       (line:   1, col:   1):      Missing or invalid 42 header
+
+	> validate_map_chars.c: Error!
 	Error: LINE_TOO_LONG        (line:  17, col:  82):      line too long
 	Error: LINE_TOO_LONG        (line:  46, col:  82):      line too long
+
+	> validate_map_data.c: Error!
+	Error: EMPTY_LINE_FILE_START (line:   1, col:   1):     Empty line at start of file
+	Error: INVALID_HEADER       (line:   1, col:   1):      Missing or invalid 42 header
+	Error: LINE_TOO_LONG        (line:  54, col:  82):      line too long
+	Error: BRACE_SHOULD_EOL     (line:  56, col:   1):      Expected newline after brace
+
