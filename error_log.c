@@ -1,10 +1,10 @@
-ORDEN ARCHIVO .cub
-## assets/maps/error_test/archivo_cub/error_test_order_1.cub 
+ORDEN ARCHIVO .cub - OK
+/*## assets / maps / error_test / archivo_cub / error_test_order_1.cub
    1. F/C
     2. TEXTURAS
      3. MAPA
 
-@ No muestra mensaje de error
+@ OUTPUT OK - RUN
 
 
 ## assets/maps/error_test/archivo_cub/error_test_order_2.cub
@@ -14,6 +14,7 @@ ORDEN ARCHIVO .cub
 
 > Error
 > Missing identifier: NO
+@ OUTPUT OK - NO RUN
 
 ## assets/maps/error_test/archivo_cub/error_test_order_3.cub
    1. MAPA
@@ -22,6 +23,8 @@ ORDEN ARCHIVO .cub
 
 > Error
 > Missing identifier: NO
+@ OUTPUT OK - NO RUN
+*/
 
 --------------------------------------------------------------------------------
 
@@ -33,14 +36,16 @@ COLOR --> TODO OK
 
 > Error
 > Duplicate identifier: C
-@ Salta el mensaje de error pero se ejecuta igual
+@ OUTPUT OK - NO RUN
 
 
 ## assets/maps/error_test/color/error_color_intmax1.cub
    F 1200000000000000000000000000000000,85,50
    C 100,160,220
 
-@ Se ejecuta igualmente 
+> Error
+> RGB values must be in range [0-255]
+@ OUTPUT OK - NO RUN
 
 
 ## assets/maps/error_test/color/error_color_intmax2.cub
@@ -49,7 +54,7 @@ COLOR --> TODO OK
 
 > Error
 > RGB values must be in range [0-255]
-@ Se ejecuta igualmente
+@ OUTPUT OK - NO RUN
 
 
 ## assets/maps/error_test/color/error_color_negativo.cub
@@ -58,14 +63,17 @@ COLOR --> TODO OK
 
 > Error
 > RGB values must be in range [0-255]
-@ Se ejecuta igualmente
+@ OUTPUT OK - NO RUN
 
 
 ## assets/maps/error_test/color/error_no_color.cub
    F 120,85,50
    C 
 
-@ Se ejecuta igualmente sin mensaje de error*/
+> Error
+> RGB must have exactly 3 values
+@ OUTPUT OK - NO RUN
+*/
 
 --------------------------------------------------------------------------------
 
@@ -80,9 +88,7 @@ TEXTURAS --> TODO OK
 
 > Error
 > Duplicate identifier: SO
-> Error
-> Missing identifier: WE
-@ El segundo mensaje de error no deberia aparecer
+@ OUTPUT OK - NO RUN
 
 
 ## assets/maps/error_test/textura/text_no_existe.cub
@@ -94,9 +100,7 @@ TEXTURAS --> TODO OK
 
 > Error
 > Cannot open texture file: ./assets/textures/waldo.png
-> Error
-> Missing identifier: F
-@ El segundo mensaje de error no deberia aparecer
+@ OUTPUT OK - NO RUN
 
 
 ## assets/maps/error_test/textura/text_ruta_sin_archivo.cub
@@ -111,9 +115,7 @@ TEXTURAS --> TODO OK
 
 > Error
 > Texture file must have .png extension: ./assets/textures/
-> Error
-> Missing identifier: EA
-@ El segundo mensaje de error no deberia aparecer
+@ OUTPUT OK - NO RUN
 
 
 ## assets/maps/error_test/textura/text_sin_formato.cub
@@ -125,9 +127,8 @@ TEXTURAS --> TODO OK
 
 > Error
 > Texture file must have .png extension: ./assets/textures/east
-> Error
-> Missing identifier: F
-@ El segundo mensaje de error no deberia aparecer*/
+@ OUTPUT OK - NO RUN
+*/
 
 --------------------------------------------------------------------------------
 
@@ -144,7 +145,10 @@ MAPA
    101111111111111111101
    100000000000000000001
    111111111111111111111
-@ Lo ejecuta normal a pesar de que es una isla de puertas*/
+
+> Error
+> Map is not closed by walls
+@ OUTPUT OK - NO RUN
 
 
 ## assets/maps/error_test/mapa/error_mapa_isla_extern_open.cub
@@ -157,10 +161,13 @@ MAPA
    101 1111111111111 101   111
    101               101
    101111111111111111101
-@ Se ejecuta a pesar de estar abierto
+
+> Error
+> Map is not closed by walls
+@ OUTPUT OK - NO RUN
 
 
-/*## assets/maps/error_test/mapa/error_mapa_isla_puerta_mal.cub 
+## assets/maps/error_test/mapa/error_mapa_isla_puerta_mal.cub 
    111111111111111111111
    100000000000000000001
    101111111111111111101
@@ -172,7 +179,10 @@ MAPA
    101111111111111111101
    100000000000000000001
    111111111111111111111
-@ Se ejecuta a pesar de tener una puerta mirando al vacio*/
+
+> Error
+> Map is not closed by walls
+@ OUTPUT OK - NO RUN
 
 
 ## assets/maps/error_test/mapa/error_mapa_puerta_fuera.cub
@@ -186,4 +196,8 @@ MAPA
    101111111111111111101
    100000000000000000001
    111111111111111111111
-@ Se ejecuta a pesar de haber una puerta sola
+
+> Error
+> Map is not closed by walls
+@ OUTPUT OK - NO RUN
+*/
