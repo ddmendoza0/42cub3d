@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map_data.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/15 15:44:33 by diespino          #+#    #+#             */
+/*   Updated: 2026/04/15 16:31:16 by diespino         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -51,6 +62,6 @@ int	validate_map_data(t_game *game)
 	if (!validate_map_closed(game))
 		return (0);
 	if (map_has_doors(game) && !game->has_door)
-		return (printf("Error\nMap has doors but DO identifier is missing\n"), 0);
+		return (printf("Error\n%s\n", ERR_NO_DO_ID), 0);
 	return (1);
 }

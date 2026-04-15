@@ -6,7 +6,7 @@
 /*   By: dmendoza <dmendoza@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 10:22:13 by dmendoza          #+#    #+#             */
-/*   Updated: 2026/03/13 10:22:15 by dmendoza         ###   ########.fr       */
+/*   Updated: 2026/04/15 15:28:26 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static int	process_line(t_list **map_lines, char *line, int *height)
 	return (1);
 }
 
-static int	collect_lines(int fd, t_list **map_lines, char *first_line, int *height)
+static int	collect_lines(int fd, t_list **map_lines,
+		char *first_line, int *height)
 {
 	char	*line;
 

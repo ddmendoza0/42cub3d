@@ -1,3 +1,45 @@
+SPACES && TABS
+## DO ./assets/textures/north.png
+
+SPACE
+   NO ./assets/textures/north.png
+   SO ./assets/textures/south.png
+   WE ./assets/textures/west.png
+   EA ./assets/textures/east.png
+    DO ./assets/textures/door.png
+ 
+> ./cub3D assets/maps/valid_test/test.cub
+> Error
+> Missing identifier: F
+"@ OUTPUT ERROR, deberia poner Map has doors but DO identifier is missing"
+
+
+TAB
+   NO ./assets/textures/north.png
+   SO ./assets/textures/south.png
+   WE ./assets/textures/west.png
+   EA ./assets/textures/east.png
+   	DO ./assets/textures/door.png
+
+> ./cub3D assets/maps/valid_test/test.cub
+> Error
+> Map has doors but DO identifier is missing
+@ Todo OK!
+
+
+MAP SPACES && TABS???
+
+" The map must be parsed as it looks in the file. Spaces are a valid part of the 
+" map and are up to you to handle. You must be able to parse any kind of map,
+" as long as it respects the rules of the map.
+Acepta o no acepta TABs??
+
+## MAP
+SPACES --> OK!
+TABS   --> NOPE
+
+--------------------------------------------------------------------------------
+
 ORDEN ARCHIVO .cub - OK
 /*## assets/maps/error_test/archivo_cub/error_test_order_1.cub
    1. F/C

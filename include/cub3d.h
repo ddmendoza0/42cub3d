@@ -6,7 +6,7 @@
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 13:11:03 by diespino          #+#    #+#             */
-/*   Updated: 2026/04/10 13:20:49 by diespino         ###   ########.fr       */
+/*   Updated: 2026/04/15 15:48:15 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 # define CUB3D_H
 
 // --- CONSTANTS ---
-
 # define WIDTH 1920
 # define HEIGHT 1080
 # define BLOCK 64
 # define PI 3.14159265359
 # define MOUSE_SENS 0.005
 
-//minimap
+// --- MINIMAP ---
 # define MINIMAP_PADDING 20
 # define MM_RADIUS 100
 # define MM_SCALE 12
+
+// --- ERROR MSG ---
+# define ERR_MAP_CHR "Invalid character in map:"
+# define ERR_NO_DO_ID "Map has doors but DO identifier is missing"
 
 // --- LIBRARIES ---
 

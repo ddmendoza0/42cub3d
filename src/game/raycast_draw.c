@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast_draw.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/15 15:24:48 by diespino          #+#    #+#             */
+/*   Updated: 2026/04/15 15:26:34 by diespino         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -16,7 +27,8 @@ static mlx_texture_t	*get_texture(t_game *game, int side, char block)
 	return (game->tex_north);
 }
 
-static void	init_texdata(t_texdata *td, double wall_x, t_proj *proj, t_game *game)
+static void	init_texdata(t_texdata *td, double wall_x,
+		t_proj *proj, t_game *game)
 {
 	td->tex_x = (int)(wall_x * (double)td->tex->width);
 	if ((proj->side == 0 && game->rcast.ray_x < 0)
@@ -43,7 +55,8 @@ static uint32_t	reorder_color(uint32_t raw)
 	return ((a << 24) | (b << 16) | (g << 8) | r);
 }
 
-static void	draw_col_pixels(t_game *game, t_texdata *td, t_proj *proj, int screen_x)
+static void	draw_col_pixels(t_game *game, t_texdata *td,
+		t_proj *proj, int screen_x)
 {
 	uint32_t	color;
 	int			y;

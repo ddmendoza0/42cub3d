@@ -6,7 +6,7 @@
 /*   By: dmendoza <dmendoza@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 10:42:46 by dmendoza          #+#    #+#             */
-/*   Updated: 2026/04/09 15:31:40 by diespino         ###   ########.fr       */
+/*   Updated: 2026/04/15 15:27:36 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ static void	draw_mm_pixel(t_game *game, int dx, int dy)
 
 	cos_a = cos(-game->player.angle + PI / 2);
 	sin_a = sin(-game->player.angle + PI / 2);
-	pos.map_x = (int)(game->player.x / BLOCK + ((-dx) * cos_a - dy * sin_a) / MM_SCALE);
-	pos.map_y = (int)(game->player.y / BLOCK - ((-dx) * sin_a + dy * cos_a) / MM_SCALE);
+	pos.map_x = (int)(game->player.x
+			/ BLOCK + ((-dx) * cos_a - dy * sin_a) / MM_SCALE);
+	pos.map_y = (int)(game->player.y
+			/ BLOCK - ((-dx) * sin_a + dy * cos_a) / MM_SCALE);
 	pos.screen_x = MINIMAP_PADDING + MM_RADIUS + dx;
 	pos.screen_y = MINIMAP_PADDING + MM_RADIUS + dy;
 	color = get_cell_color(game, pos.map_x, pos.map_y);
