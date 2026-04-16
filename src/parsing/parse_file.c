@@ -24,6 +24,8 @@ static int	check_extension(char *filename)
 
 static int	is_map_start(char *line)
 {
+	int	i;
+
 	if (line[0] == '0' || line[0] == '1')
 		return (1);
 	if (line[0] == 'D' && line[1] != 'O')
