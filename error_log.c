@@ -1,4 +1,5 @@
 SPACES && TABS
+/*
 ## DO ./assets/textures/north.png
 
 SPACE
@@ -10,8 +11,7 @@ SPACE
  
 > ./cub3D assets/maps/valid_test/test.cub
 > Error
-> Missing identifier: F
-"@ OUTPUT ERROR, deberia poner Map has doors but DO identifier is missing"
+> Map has doors but DO identifier is missing
 
 
 TAB
@@ -25,6 +25,7 @@ TAB
 > Error
 > Map has doors but DO identifier is missing
 @ Todo OK!
+*/
 
 
 MAP SPACES && TABS???
