@@ -24,13 +24,20 @@ static int	check_extension(char *filename)
 
 static int	is_map_start(char *line)
 {
-	if (line[0] == '0' || line[0] == '1' || line[0] == ' ' )
+	if (line[0] == '0' || line[0] == '1')
 		return (1);
 	if (line[0] == 'D' && line[1] != 'O')
 		return (1);
 	if (is_player(line[0]) && line[1] != 'O' && line[1] != 'E'
 		&& line[1] != 'A' && line[1] != 'W')
 		return (1);
+	if (line[0] == ' ')
+	{
+		i = 0;
+		while (line[i] == ' ')
+			i++;
+		return (line[i] == '0' || line[i] == '1');
+	}
 	return (0);
 }
 
