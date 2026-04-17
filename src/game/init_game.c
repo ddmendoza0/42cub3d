@@ -17,13 +17,13 @@ static void	init_player(t_game *game)
 	game->player.x = (game->player.x * BLOCK) + (BLOCK / 2.0);
 	game->player.y = (game->player.y * BLOCK) + (BLOCK / 2.0);
 	if (game->player.orientation == 'N')
-		game->player.angle = 3.0 * PI / 2.0;
+		game->player.angle = 3.01 * PI / 2.0;
 	else if (game->player.orientation == 'S')
 		game->player.angle = PI / 2.0;
 	else if (game->player.orientation == 'E')
 		game->player.angle = 0.0;
 	else if (game->player.orientation == 'W')
-		game->player.angle = PI;
+		game->player.angle = PI + 0.01;
 }
 
 int	init_game(t_game *game)
