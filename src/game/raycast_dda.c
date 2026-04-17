@@ -6,7 +6,7 @@
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:26:35 by diespino          #+#    #+#             */
-/*   Updated: 2026/04/09 15:56:35 by diespino         ###   ########.fr       */
+/*   Updated: 2026/04/17 16:50:07 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ static double	grid_dist(t_game *game, int side, double ray_angle)
 	double	dist;
 
 	if (side == 0)
-		dist = ((game->rcast.map_x - game->player.x / BLOCK
-					+ (1 - game->rcast.step_x) / 2.0)
-				* BLOCK / game->rcast.ray_x);
+		dist = game->rcast.side_dist_x - game->rcast.dist_x;
+//		dist = ((game->rcast.map_x - game->player.x / BLOCK
+//					+ (1 - game->rcast.step_x) / 2.0)
+//				* BLOCK / game->rcast.ray_x);
 	else
-		dist = ((game->rcast.map_y - game->player.y / BLOCK
-					+ (1 - game->rcast.step_y) / 2.0)
-				* BLOCK / game->rcast.ray_y);
+		dist = game->rcast.side_dist_y - game->rcast.dist_y;
+//		dist = ((game->rcast.map_y - game->player.y / BLOCK
+//					+ (1 - game->rcast.step_y) / 2.0)
+//				* BLOCK / game->rcast.ray_y);
 	dist *= cos(ray_angle - game->player.angle);
 	return (dist);
 }
@@ -36,6 +38,10 @@ static int	grid_move(t_game *game)
 	hit = false;
 	while (!hit)
 	{
+//		if (game->rcast.map_x < 0 || game->rcast.map_y < 0
+//				|| game->rcast.map_y >= game->map.height
+//				|| game->rcast.map_x >= game->map.width)
+//			break ;
 		if (game->rcast.side_dist_x < game->rcast.side_dist_y)
 		{
 			game->rcast.side_dist_x += game->rcast.dist_x;
@@ -51,6 +57,7 @@ static int	grid_move(t_game *game)
 		if (game->map.grid[game->rcast.map_y][game->rcast.map_x] == '1' ||
 			game->map.grid[game->rcast.map_y][game->rcast.map_x] == 'D')
 			hit = true;
+//		printf("map_x [%d] map_y [%d] [%c]\n", game->rcast.map_x, game->rcast.map_y, game->map.grid[game->rcast.map_y][game->rcast.map_x]);
 	}
 	return (side);
 }
@@ -94,8 +101,14 @@ void	draw_line(t_game *game, double ray_angle, int screen_x)
 	game->rcast.map_y = (int)(game->player.y / BLOCK);
 	game->rcast.ray_x = cos(ray_angle);
 	game->rcast.ray_y = sin(ray_angle);
-	game->rcast.dist_x = fabs(BLOCK / game->rcast.ray_x);
-	game->rcast.dist_y = fabs(BLOCK / game->rcast.ray_y);
+/*	if (game->rcast.ray_x == 0)
+		game->rcast.dist_x = 1e30;
+	else*/
+		game->rcast.dist_x = fabs(BLOCK / game->rcast.ray_x);
+/*	if (game->rcast.ray_y == 0)
+		game->rcast.dist_y = 1e30;
+	else*/
+		game->rcast.dist_y = fabs(BLOCK / game->rcast.ray_y);
 	grid_pos_init(game);
 	side = grid_move(game);
 	dist = grid_dist(game, side, ray_angle);

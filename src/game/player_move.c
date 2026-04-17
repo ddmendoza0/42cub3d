@@ -6,7 +6,7 @@
 /*   By: diespino <diespino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 11:58:57 by diespino          #+#    #+#             */
-/*   Updated: 2026/04/09 15:27:26 by diespino         ###   ########.fr       */
+/*   Updated: 2026/04/17 16:49:05 by diespino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ bool	touch(double ray_x, double ray_y, t_game *game)
 	int	x;
 	int	y;
 
-	x = (int)(ray_x / BLOCK);
-	y = (int)(ray_y / BLOCK);
+	x = (int)floor(ray_x / BLOCK);
+	y = (int)floor(ray_y / BLOCK);
 	if (y < 0 || x < 0 || !game->map.grid[y] || !game->map.grid[y][x])
 		return (true);
 	return (game->map.grid[y][x] == '1' || game->map.grid[y][x] == 'D');
@@ -60,21 +60,20 @@ static void	move_forward_backward(double dir_x, double dir_y, t_game *game)
 	{
 		new_x = game->player.x + dir_x;
 		new_y = game->player.y + dir_y;
-		if (!touch(new_x, new_y, game))
-		{
-			game->player.x += dir_x;
-			game->player.y += dir_y;
-		}
+		if (!touch(new_x, game->player.y, game))
+			game->player.x = new_x;
+		if (!touch(game->player.x, new_y, game))
+			game->player.y = new_y;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{
 		new_x = game->player.x - dir_x;
 		new_y = game->player.y - dir_y;
-		if (!touch(new_x, new_y, game))
-		{
-			game->player.x -= dir_x;
-			game->player.y -= dir_y;
-		}
+		if (!touch(new_x, game->player.y, game))
+			game->player.x = new_x;
+		if (!touch(game->player.x, new_y, game))
+			game->player.y = new_y;
+
 	}
 }
 
@@ -87,21 +86,19 @@ static void	strafe_move(double dir_x, double dir_y, t_game *game)
 	{
 		new_x = game->player.x + dir_y;
 		new_y = game->player.y - dir_x;
-		if (!touch(new_x, new_y, game))
-		{
-			game->player.x += dir_y;
-			game->player.y -= dir_x;
-		}
+		if (!touch(new_x, game->player.y, game))
+			game->player.x = new_x;
+		if (!touch(game->player.x, new_y, game))
+			game->player.y = new_y;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{
 		new_x = game->player.x - dir_y;
 		new_y = game->player.y + dir_x;
-		if (!touch(new_x, new_y, game))
-		{
-			game->player.x -= dir_y;
-			game->player.y += dir_x;
-		}
+		if (!touch(new_x, game->player.y, game))
+			game->player.x = new_x;
+		if (!touch(game->player.x, new_y, game))
+			game->player.y = new_y;
 	}
 }
 
